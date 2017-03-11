@@ -37,7 +37,7 @@ public class Hex {
             data[b++] = (byte) ((high << 4) + low);
         }
         if (b < data.length) {
-            data = Arrays.copyOfRange(data, 0, b-1);
+            data = Arrays.copyOfRange(data, 0, b);
         }
         return data;
     }

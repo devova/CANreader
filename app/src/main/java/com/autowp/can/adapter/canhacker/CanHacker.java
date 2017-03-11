@@ -1,5 +1,7 @@
 package com.autowp.can.adapter.canhacker;
 
+import android.util.Log;
+
 import com.autowp.Hex;
 import com.autowp.can.CanAdapter;
 import com.autowp.can.CanAdapterException;
@@ -19,9 +21,12 @@ import com.autowp.can.adapter.canhacker.response.OkResponse;
 import com.autowp.can.adapter.canhacker.response.Response;
 
 import java.util.Arrays;
+import java.util.StringTokenizer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class CanHacker extends CanAdapter {
 
@@ -36,6 +41,7 @@ public abstract class CanHacker extends CanAdapter {
     private static final int DEFAULT_TIMEOUT = 5000;
     private static final int INITIAL_RESET_RETRY_INTERVAL = 250;
     private static final int INITIAL_RESET_TIMEOUT = 15000;
+    private static Pattern CAN_REGEX = Pattern.compile("R\\s([0-9a-fA-F]{1,5})\\s(\\d{1,3})\\s(([0-9a-fA-F]{2}\\s?)+)");
 
     private byte[] buffer = new byte[1024];
     private int bufferPos = 0;
@@ -147,16 +153,20 @@ public abstract class CanHacker extends CanAdapter {
             }
 
             switch (aByte) {
-                case BELL:
-                    bufferPos = 0;
-                    if (mCollectReponses) {
-                        responses.add(new BellResponse());
-                    }
-                    break;
+//                case BELL:
+//                    bufferPos = 0;
+//                    if (mCollectReponses) {
+//                        responses.add(new BellResponse());
+//                    }
+//                    break;
                 case COMMAND_DELIMITER:
                     if (bufferPos > 0) {
-                        byte[] commandBytes = new byte[bufferPos];
-                        System.arraycopy(buffer, 0, commandBytes, 0, bufferPos);
+                        int startPos = 0;
+                        while (buffer[startPos] == 10) { startPos++; }
+                        int endPos = bufferPos - startPos;
+                        while (buffer[endPos] == 0) { endPos--; }
+                        byte[] commandBytes = new byte[endPos];
+                        System.arraycopy(buffer, startPos, commandBytes, 0, endPos);
                         bufferPos = 0;
                         try {
                             Response response = Response.fromBytes(commandBytes);
@@ -192,76 +202,88 @@ public abstract class CanHacker extends CanAdapter {
         if (bytes.length < 5) {
             throw new CanHackerException("Frame response must be >= 5 bytes long");
         }
+        Log.d("CAN", new String(bytes));
+        Matcher canMatch = CAN_REGEX.matcher(new String(bytes));
 
         boolean isExtended;
         boolean isRTR;
 
-        switch (bytes[0]) {
-            case COMMAND_11BIT:
-                isExtended = false;
-                isRTR = false;
-                break;
-            case COMMAND_11BIT_RTR:
-                isExtended = false;
-                isRTR = true;
-                break;
-            case COMMAND_29BIT:
-                isExtended = true;
-                isRTR = false;
-                break;
-            case COMMAND_29BIT_RTR:
-                isExtended = true;
-                isRTR = true;
-                break;
-            default:
-                throw new CanHackerException("Frame response starts with unexpected character");
+        if (!canMatch.matches()) {
+            throw new CanHackerException("Frame response starts with unexpected character");
         }
 
-        int idLength = isExtended ? 8 : 3;
-        int id = Hex.bytesToInt(Arrays.copyOfRange(bytes, 1, 1+idLength));
+        isRTR = false;
+        isExtended = canMatch.group(1).length() > 3;
 
-        int maxLength = 1 + idLength + 1 + 2 * CanFrame.MAX_DLC + FrameResponse.TIMESTAMP_LENGTH_CHARS;
-        if (bytes.length > maxLength) {
-            String hex = Hex.byteArrayToHexString(bytes);
-            throw new CanHackerException(
-                    String.format("Frame response must be <= %d bytes long. `%s`", maxLength, hex)
-            );
-        }
 
-        byte dlc = (byte) Character.digit(bytes[1+idLength], 16);
+//        switch (bytes[0]) {
+//            case COMMAND_11BIT:
+//                isExtended = false;
+//                isRTR = false;
+//                break;
+//            case COMMAND_11BIT_RTR:
+//                isExtended = false;
+//                isRTR = true;
+//                break;
+//            case COMMAND_29BIT:
+//                isExtended = true;
+//                isRTR = false;
+//                break;
+//            case COMMAND_29BIT_RTR:
+//                isExtended = true;
+//                isRTR = true;
+//                break;
+//            default:
+//                throw new CanHackerException("Frame response starts with unexpected character");
+//        }
 
+//        int idLength = isExtended ? 8 : 3;
+        int id = Hex.bytesToInt(canMatch.group(1).getBytes());
+
+//        int maxLength = 1 + idLength + 1 + 3 * CanFrame.MAX_DLC + FrameResponse.TIMESTAMP_LENGTH_CHARS;
+//        if (bytes.length > maxLength) {
+//            String hex = Hex.byteArrayToHexString(bytes);
+//            throw new CanHackerException(
+//                    String.format("Frame response must be <= %d bytes long. `%s`", maxLength, hex)
+//            );
+//        }
+
+        byte dlc = (byte) Integer.parseInt(canMatch.group(2));
         byte[] data = null;
-        int dlcStart = 1 + idLength + 1;
+//        int dlcStart =  + idLength + 1;
         if (!isRTR) {
-            if (bytes.length < dlcStart + dlc * 2) {
-                throw new CanHackerException(
-                    String.format("Frame response data length smaller than data length byte value (%d) %s", dlc, new String(bytes))
-                );
-            }
+//            if (bytes.length < dlcStart + dlc * 2) {
+//                throw new CanHackerException(
+//                    String.format("Frame response data length smaller than data length byte value (%d) %s", dlc, new String(bytes))
+//                );
+//            }
 
             try {
-                data = Hex.hexStringToByteArray(Arrays.copyOfRange(bytes, dlcStart, dlcStart + dlc * 2));
+                data = Hex.hexStringToByteArray(canMatch.group(3));
             } catch (Exception e) {
-                throw new CanHackerException("Failed to parse frame data: " + e.getMessage());
+                throw new CanHackerException("Failed to parse frame data: " + canMatch.group(3));
             }
 
             if (data.length != dlc) {
-                throw new CanHackerException("Actual data length differ than DLC");
+                dlc = (byte) data.length;
+//                throw new CanHackerException("Actual data length differ than DLC");
             }
         }
 
-        int tsOffset = dlcStart + dlc * 2;
+//        int tsOffset = dlcStart + dlc * 2;
 
-        if (bytes.length == tsOffset + FrameResponse.TIMESTAMP_LENGTH_CHARS) {
-            int timestamp = Hex.bytesToInt(
-                    Arrays.copyOfRange(bytes, tsOffset, tsOffset + FrameResponse.TIMESTAMP_LENGTH_CHARS)
-            );
-        }
+//        if (bytes.length == tsOffset + FrameResponse.TIMESTAMP_LENGTH_CHARS) {
+//            int timestamp = Hex.bytesToInt(
+//                    Arrays.copyOfRange(bytes, tsOffset, tsOffset + FrameResponse.TIMESTAMP_LENGTH_CHARS)
+//            );
+//        }
         //TODO: save timestamp
 
         if (isRTR) {
             return new CanFrame(id, dlc, isExtended);
         } else {
+            Log.d("CAN-ID", String.format("ID: %1$d, DLC: %2$d", id, dlc));
+            Log.d("CAN-DATA", new String(data));
             return new CanFrame(id, data, isExtended);
         }
 
@@ -343,72 +365,72 @@ public abstract class CanHacker extends CanAdapter {
             mReceiveThread.start();
         }
 
-        try {
-
-            BitRateCommand.BitRate busSpeed;
-            switch (specs.getSpeed()) {
-                case 10:
-                    busSpeed = BitRateCommand.BitRate.S0;
-                    break;
-                case 20:
-                    busSpeed = BitRateCommand.BitRate.S1;
-                    break;
-                case 50:
-                    busSpeed = BitRateCommand.BitRate.S2;
-                    break;
-                case 100:
-                    busSpeed = BitRateCommand.BitRate.S3;
-                    break;
-                case 125:
-                    busSpeed = BitRateCommand.BitRate.S4;
-                    break;
-                case 250:
-                    busSpeed = BitRateCommand.BitRate.S5;
-                    break;
-                case 500:
-                    busSpeed = BitRateCommand.BitRate.S6;
-                    break;
-                case 800:
-                    busSpeed = BitRateCommand.BitRate.S7;
-                    break;
-                case 1000:
-                    busSpeed = BitRateCommand.BitRate.S8;
-                    break;
-                default:
-                    throw new CanHackerException("Unsupported bus speed");
-
-            }
+//        try {
+//
+//            BitRateCommand.BitRate busSpeed;
+//            switch (specs.getSpeed()) {
+//                case 10:
+//                    busSpeed = BitRateCommand.BitRate.S0;
+//                    break;
+//                case 20:
+//                    busSpeed = BitRateCommand.BitRate.S1;
+//                    break;
+//                case 50:
+//                    busSpeed = BitRateCommand.BitRate.S2;
+//                    break;
+//                case 100:
+//                    busSpeed = BitRateCommand.BitRate.S3;
+//                    break;
+//                case 125:
+//                    busSpeed = BitRateCommand.BitRate.S4;
+//                    break;
+//                case 250:
+//                    busSpeed = BitRateCommand.BitRate.S5;
+//                    break;
+//                case 500:
+//                    busSpeed = BitRateCommand.BitRate.S6;
+//                    break;
+//                case 800:
+//                    busSpeed = BitRateCommand.BitRate.S7;
+//                    break;
+//                case 1000:
+//                    busSpeed = BitRateCommand.BitRate.S8;
+//                    break;
+//                default:
+//                    throw new CanHackerException("Unsupported bus speed");
+//
+//            }
 
             // try to reset about 15 seconds for long device bootup like arduino
-            Response response = null;
-            for (int i = 0; i < INITIAL_RESET_TIMEOUT / INITIAL_RESET_RETRY_INTERVAL; i++) {
-                clearResponses();
-                response = sendAndWaitResponse(new ResetModeCommand(), INITIAL_RESET_RETRY_INTERVAL);
-                if (response != null) {
-                    break;
-                }
-            }
-
-            if (response == null) {
-                throw new CanHackerException("C response timeout");
-            }
-
-            if (!(response instanceof OkResponse) && !(response instanceof BellResponse)) {
-                throw new CanHackerException(
-                        String.format("Not proper response for C `%s`", response.toString())
-                );
-            }
-
+//            Response response = null;
+//            for (int i = 0; i < INITIAL_RESET_TIMEOUT / INITIAL_RESET_RETRY_INTERVAL; i++) {
+//                clearResponses();
+//                response = sendAndWaitResponse(new ResetModeCommand(), INITIAL_RESET_RETRY_INTERVAL);
+//                if (response != null) {
+//                    break;
+//                }
+//            }
+//
+//            if (response == null) {
+//                throw new CanHackerException("C response timeout");
+//            }
+//
+//            if (!(response instanceof OkResponse) && !(response instanceof BellResponse)) {
+//                throw new CanHackerException(
+//                        String.format("Not proper response for C `%s`", response.toString())
+//                );
+//            }
+//
+//            clearResponses();
+//            sendAndWaitOk(new BitRateCommand(busSpeed), 3000);
+//            clearResponses();
+//            sendAndWaitOk(new OperationalModeCommand(), 3000);
             clearResponses();
-            sendAndWaitOk(new BitRateCommand(busSpeed), 3000);
-            clearResponses();
-            sendAndWaitOk(new OperationalModeCommand(), 3000);
-            clearResponses();
 
-        } catch (CanHackerException e) {
-            mCollectReponses = false;
-            throw e;
-        }
+//        } catch (CanHackerException e) {
+//            mCollectReponses = false;
+//            throw e;
+//        }
 
         mCollectReponses = false;
     }

@@ -1,5 +1,7 @@
 package com.autowp.can.adapter.canhacker.response;
 
+import android.util.Log;
+
 import com.autowp.Hex;
 import com.autowp.can.CanFrameException;
 import com.autowp.can.adapter.canhacker.CanHacker;
@@ -28,9 +30,9 @@ abstract public class Response {
             case CanHacker.COMMAND_29BIT_RTR:
                 return new FrameResponse(bytes);
         }
-        
-        String hex = Hex.byteArrayToHexString(bytes);
-        
-        throw new ResponseException("Invalid response: response type not found. `" + hex + "`");
+        return new OkResponse();
+//        String hex = Hex.byteArrayToHexString(bytes);
+//
+//        throw new ResponseException("Invalid response: response type not found. `" + hex + "`");
     }
 }
