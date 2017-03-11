@@ -170,6 +170,7 @@ public abstract class CanHacker extends CanAdapter {
                         bufferPos = 0;
                         try {
                             Response response = Response.fromBytes(commandBytes);
+//                            String s = response.toString();
                             if (response instanceof FrameResponse) {
                                 receive(((FrameResponse)response).getFrame());
                             } else {
@@ -282,8 +283,6 @@ public abstract class CanHacker extends CanAdapter {
         if (isRTR) {
             return new CanFrame(id, dlc, isExtended);
         } else {
-            Log.d("CAN-ID", String.format("ID: %1$d, DLC: %2$d", id, dlc));
-            Log.d("CAN-DATA", new String(data));
             return new CanFrame(id, data, isExtended);
         }
 
@@ -294,27 +293,26 @@ public abstract class CanHacker extends CanAdapter {
     }
 
     public static String assembleTransmitString(final CanFrame frame) {
-        String format;
-        String name;
-        if (frame.isExtended()) {
-            format = "%s%08X%1X";
-            if (frame.isRTR()) {
-                name = "R";
-            } else {
-                name = "T";
-            }
-        } else {
-            format = "%s%03X%1X";
-            if (frame.isRTR()) {
-                name = "r";
-            } else {
-                name = "t";
-            }
-        }
+        String format = "%03X %1d ";
+//        String name = "T";
+//        if (frame.isExtended()) {
+//            format = "%s%08X%1X";
+//            if (frame.isRTR()) {
+//                name = "R";
+//            } else {
+//                name = "T";
+//            }
+//        } else {
+//            format = "%s%03X%1X";
+//            if (frame.isRTR()) {
+//                name = "r";
+//            } else {
+//                name = "t";
+//            }
+//        }
 
         String result = String.format(
                 format,
-                name,
                 frame.getId(),
                 frame.getDLC()
         );
