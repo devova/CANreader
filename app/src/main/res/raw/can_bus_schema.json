@@ -1,0 +1,32 @@
+{
+  "messages": [
+    {
+      "name": "Current sound level",
+      "id": "0x1A5",
+      "signals": {
+        "0": {
+          "name": "Volume has changed",
+          "bit_length": 3
+        },
+        "3": {
+          "name": "Volume",
+          "bit_length": 5
+        }
+      }
+    },
+    {
+      "name": "BSI RPM/Speed",
+      "id": "0x0B6",
+      "signals": {
+        "0": {
+          "name": "RPM",
+          "bit_length": 13
+        },
+        "15": {
+          "name": "Speed",
+          "bit_length": 16
+        }
+      }
+    }
+  ]
+}
