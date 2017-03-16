@@ -1,7 +1,7 @@
-package com.jwit.parser;
+package com.jvit.parser;
 
 
-import com.jwit.bus.Bus;
+import com.jvit.bus.Bus;
 
 import java.io.ByteArrayOutputStream;
 

@@ -1,4 +1,4 @@
-package com.jwit.bus;
+package com.jvit.bus;
 
 
 public class Signal {
@@ -6,7 +6,7 @@ public class Signal {
     public int startBit;
     public int bitLength;
     public double factor = 1;
-    public int offset = 0;
+    public double offset = 0;
     public double value = 0;
 
     public Signal(String name, int startBit, int bitLength) {

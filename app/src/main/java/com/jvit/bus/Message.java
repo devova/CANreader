@@ -1,7 +1,8 @@
-package com.jwit.bus;
+package com.jvit.bus;
 
 
 import com.autowp.can.CanFrame;
+import com.autowp.can.CanMessage;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class Message {
         this.signals.add(signal);
     }
 
-    public ArrayList<Signal> parseFrame(CanFrame frame) {
+    public ArrayList<Signal> parseFrame(CanMessage frame) {
         long frameValue = 0;
 
         for (int i = 0; i < frame.getDLC(); i++) {

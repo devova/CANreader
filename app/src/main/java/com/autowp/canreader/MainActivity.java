@@ -13,8 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.jvit.bus.Bus;
+import com.jvit.parser.JsonParser;
+
 import org.apache.commons.configuration.ConfigurationException;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -156,6 +160,12 @@ public class MainActivity extends ServiceConnectedActivity {
 
             case R.id.action_about: {
                 Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            }
+
+            case R.id.action_can_schema: {
+                Intent intent = new Intent(this, CanBusSchemaActivity.class);
                 startActivity(intent);
                 return true;
             }

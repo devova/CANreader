@@ -1,8 +1,8 @@
-package com.jwit.parser;
+package com.jvit.parser;
 
-import com.jwit.bus.Bus;
-import com.jwit.bus.Message;
-import com.jwit.bus.Signal;
+import com.jvit.bus.Bus;
+import com.jvit.bus.Message;
+import com.jvit.bus.Signal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +36,7 @@ public class JsonParser implements SchemaParser {
                         signal.factor = s.getDouble("factor");
                     }
                     if (s.has("offset")) {
-                        signal.offset = s.getInt("offset");
+                        signal.offset = s.getDouble("offset");
                     }
                     message.addSignal(signal);
                 }

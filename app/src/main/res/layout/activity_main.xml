@@ -32,9 +32,8 @@
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="293dp"
         android:name="com.autowp.canreader.TransmitFragment"
         android:id="@+id/fragmentTransmit"
-        tools:layout="@layout/fragment_transmit"
-        android:layout_weight="1" />
+        tools:layout="@layout/fragment_transmit" />
 </LinearLayout>

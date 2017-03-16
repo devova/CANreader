@@ -10,7 +10,14 @@ import android.widget.TextView;
 
 import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
+import com.jvit.bus.Bus;
+import com.jvit.bus.Signal;
+import com.jvit.parser.JsonParser;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,6 +25,8 @@ import java.util.Locale;
  * Created by autow on 31.01.2016.
  */
 public class MonitorCanMessageListAdapter extends ArrayAdapter<MonitorCanMessage> {
+    private Bus bus;
+
     public MonitorCanMessageListAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
     }
@@ -33,6 +42,34 @@ public class MonitorCanMessageListAdapter extends ArrayAdapter<MonitorCanMessage
 
         TextView textViewCount = (TextView) v.findViewById(R.id.listitem_monitor_count);
         textViewCount.setText(String.format(Locale.getDefault(), "%d", frame.getCount()));
+    }
+
+    public void setBus(Bus b) {
+        bus = b;
+    }
+
+    private Bus getBus(View convertView) {
+        if (bus == null) {
+            //Get Data From Text Resource File Contains Json Data.
+            InputStream inputStream = convertView.getResources().openRawResource(R.raw.can_bus_schema);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            int ctr;
+            try {
+                ctr = inputStream.read();
+                while (ctr != -1) {
+                    byteArrayOutputStream.write(ctr);
+                    ctr = inputStream.read();
+                }
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            JsonParser jsonParser = new JsonParser();
+            bus = jsonParser.parse(byteArrayOutputStream);
+        }
+        return bus;
     }
 
     @Override
@@ -66,6 +103,15 @@ public class MonitorCanMessageListAdapter extends ArrayAdapter<MonitorCanMessage
 
             rtrLine.setVisibility(canMessage.isRTR() ? View.VISIBLE : View.GONE);
             dataLine.setVisibility(canMessage.isRTR() ? View.GONE : View.VISIBLE);
+
+            ArrayList<Signal> parsedSignals = getBus(v).parseFrame(canMessage);
+            String signals = "";
+            for (Signal s: parsedSignals) {
+                signals = String.format("%s\n%s", signals, s.toString());
+            }
+            TextView textViewSignals = (TextView) v.findViewById(R.id.listitem_monitor_signals);
+            textViewSignals.setText(signals);
+
 
             if (canMessage.isRTR()) {
 

@@ -5,12 +5,12 @@
       "id": "0x1A5",
       "signals": {
         "0": {
-          "name": "Volume has changed",
-          "bit_length": 3
-        },
-        "3": {
           "name": "Volume",
-          "bit_length": 5
+          "bit_length": 4
+        },
+        "4": {
+          "name": "Volume has changed",
+          "bit_length": 4
         }
       }
     },
@@ -25,6 +25,55 @@
         "15": {
           "name": "Speed",
           "bit_length": 16
+        }
+      }
+    },
+    {
+      "name": "Battery",
+      "id": "0x0E6",
+      "signals": {
+        "47": {
+          "name": "Voltage",
+          "bit_length": 8,
+          "factor": 0.05,
+          "offset": 7
+        }
+      }
+    },
+    {
+      "name": "Info",
+      "id": "0x0F6",
+      "signals": {
+        "4": {
+          "name": "Ignition",
+          "bit_length": 1
+        },
+        "8": {
+          "name": "Temperature Coolant",
+          "bit_length": 8,
+          "offset": -39
+        },
+        "15": {
+          "name": "Odometer",
+          "bit_length": 24
+        },
+        "55": {
+          "name": "Out Temp",
+          "bit_length": 8,
+          "factor": 0.5,
+          "offset": -39.5
+        },
+        "63": {
+          "name": "Reverse gear light",
+          "bit_length": 1
+        },
+        "69": {
+          "name": "Turn left light",
+          "bit_length": 1
+        },
+        "70": {
+          "name": "Turn right light",
+          "bit_length": 1
         }
       }
     }

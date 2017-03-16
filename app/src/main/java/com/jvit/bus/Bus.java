@@ -1,6 +1,7 @@
-package com.jwit.bus;
+package com.jvit.bus;
 
 import com.autowp.can.CanFrame;
+import com.autowp.can.CanMessage;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Bus {
         this.messages.add(message);
     }
 
-    public ArrayList<Signal> parseFrame(CanFrame frame) {
+    public ArrayList<Signal> parseFrame(CanMessage frame) {
         ArrayList<Signal> result = new ArrayList<>();
         for (Message message: this.messages) {
             if (frame.getId() == message.id) {

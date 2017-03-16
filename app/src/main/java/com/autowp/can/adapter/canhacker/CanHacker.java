@@ -170,7 +170,6 @@ public abstract class CanHacker extends CanAdapter {
                         bufferPos = 0;
                         try {
                             Response response = Response.fromBytes(commandBytes);
-//                            String s = response.toString();
                             if (response instanceof FrameResponse) {
                                 receive(((FrameResponse)response).getFrame());
                             } else {

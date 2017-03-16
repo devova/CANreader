@@ -37,12 +37,12 @@
         </LinearLayout>
 
         <ListView
+            android:id="@+id/listViewMonitor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listViewMonitor"
             android:layout_gravity="center"
-            tools:listitem="@layout/listitem_monitor"
-            tools:context=".MonitorFragment"/>
+            tools:context=".MonitorFragment"
+            tools:listitem="@layout/listitem_monitor" />
 
     </LinearLayout>
 

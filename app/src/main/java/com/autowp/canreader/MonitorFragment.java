@@ -17,6 +17,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jvit.bus.Bus;
+import com.jvit.parser.JsonParser;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class MonitorFragment extends ServiceConnectedFragment {
 
     private MonitorCanMessageListAdapter adapter;
@@ -83,6 +90,7 @@ public class MonitorFragment extends ServiceConnectedFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_monitor, container, false);
 
