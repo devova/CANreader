@@ -104,7 +104,7 @@ public class MonitorCanMessageListAdapter extends ArrayAdapter<MonitorCanMessage
             rtrLine.setVisibility(canMessage.isRTR() ? View.VISIBLE : View.GONE);
             dataLine.setVisibility(canMessage.isRTR() ? View.GONE : View.VISIBLE);
 
-            ArrayList<Signal> parsedSignals = getBus(v).parseFrame(canMessage);
+            ArrayList<Signal> parsedSignals = getBus(v).parseMessage(canMessage);
             String signals = "";
             for (Signal s: parsedSignals) {
                 signals = String.format("%s\n%s", signals, s.toString());

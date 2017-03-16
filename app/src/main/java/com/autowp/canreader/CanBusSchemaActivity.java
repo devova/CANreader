@@ -1,19 +1,16 @@
 package com.autowp.canreader;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import com.jvit.bus.Bus;
-import com.jvit.bus.Message;
 import com.jvit.parser.JsonParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
-public class CanBusSchemaActivity extends AppCompatActivity {
+public class CanBusSchemaActivity extends ServiceConnectedActivity implements CanReaderService.OnMonitorChangedListener {
     private Bus bus;
 
     @Override
@@ -45,6 +42,31 @@ public class CanBusSchemaActivity extends AppCompatActivity {
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.schemaMessages);
         listView.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void afterConnect() {
+        canReaderService.addListener(this);
+    }
+
+    @Override
+    protected void beforeDisconnect() {
+        canReaderService.removeListener(this);
+    }
+
+    @Override
+    public void handleMonitorUpdated() {
+
+    }
+
+    @Override
+    public void handleMonitorUpdated(MonitorCanMessage message) {
+        bus.parseMessage(message.getCanMessage());
+    }
+
+    @Override
+    public void handleSpeedChanged(double speed) {
 
     }
 }

@@ -24,7 +24,7 @@ public class Signal {
     }
 
     public String toDocString() {
-        return String.format("%s: start=%d length=%d factor=%2.1f offset=%2.1f",
-                this.name, this.startBit, this.bitLength, this.factor, this.offset);
+        return String.format("%s: start=%d length=%d factor=%2.1f offset=%2.1f value=%2.1f",
+                this.name, this.startBit, this.bitLength, this.factor, this.offset, this.value);
     }
 }

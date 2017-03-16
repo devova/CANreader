@@ -13,11 +13,11 @@ public class Bus {
         this.messages.add(message);
     }
 
-    public ArrayList<Signal> parseFrame(CanMessage frame) {
+    public ArrayList<Signal> parseMessage(CanMessage canMessage) {
         ArrayList<Signal> result = new ArrayList<>();
         for (Message message: this.messages) {
-            if (frame.getId() == message.id) {
-                result = message.parseFrame(frame);
+            if (canMessage.getId() == message.id) {
+                result = message.parseFrame(canMessage);
                 break;
             }
         }
