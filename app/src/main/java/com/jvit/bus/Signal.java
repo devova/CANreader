@@ -15,26 +15,16 @@ public class Signal {
         this.bitLength = bitLength;
     }
 
-    public Signal(String name, int startBit, int bitLength, double factor) {
-        this.name = name;
-        this.startBit = startBit;
-        this.bitLength = bitLength;
-        this.factor = factor;
-    }
-
-    public Signal(String name, int startBit, int bitLength, double factor, int offset) {
-        this.name = name;
-        this.startBit = startBit;
-        this.bitLength = bitLength;
-        this.factor = factor;
-        this.offset = offset;
-    }
-
     public void parseValue(int value) {
         this.value = value * this.factor + this.offset;
     }
 
     public String toString() {
-        return String.format("%s: %4.3f", this.name, this.value);
+        return String.format("%s: %2.1f", this.name, this.value);
+    }
+
+    public String toDocString() {
+        return String.format("%s: start=%d length=%d factor=%2.1f offset=%2.1f",
+                this.name, this.startBit, this.bitLength, this.factor, this.offset);
     }
 }

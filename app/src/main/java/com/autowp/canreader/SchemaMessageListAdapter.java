@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jvit.bus.Message;
+import com.jvit.bus.Signal;
 
 import java.util.ArrayList;
 
@@ -29,13 +30,17 @@ public class SchemaMessageListAdapter extends ArrayAdapter<Message> {
         // Lookup view for data population
         TextView tvId = (TextView) convertView.findViewById(R.id.canMessageId);
         TextView tvName = (TextView) convertView.findViewById(R.id.canMessageName);
+        TextView tvSignals = (TextView) convertView.findViewById(R.id.canMessagesignals);
         // Populate the data into the template view using the data object
         tvId.setText(String.format("%03X", message.id));
         tvName.setText(message.name);
 
-        SchemaMessageSignalListAdapter adapter = new SchemaMessageSignalListAdapter(getContext(), message.signals);
-        ListView listView = (ListView) convertView.findViewById(R.id.schemaMessageSignals);
-        listView.setAdapter(adapter);
+        String signals = "";
+        for (Signal s: message.signals) {
+            signals = String.format("%s\n%s", signals, s.toDocString());
+        }
+        tvSignals.setText(signals);
+
         // Return the completed view to render on screen
         return convertView;
     }
