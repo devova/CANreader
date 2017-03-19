@@ -12,6 +12,7 @@ import java.io.InputStream;
 
 public class CanBusSchemaActivity extends ServiceConnectedActivity implements CanReaderService.OnMonitorChangedListener {
     private Bus bus;
+    private SchemaMessageListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,18 @@ public class CanBusSchemaActivity extends ServiceConnectedActivity implements Ca
         bus = jsonParser.parse(byteArrayOutputStream);
 
         // Create the adapter to convert the array to views
-        SchemaMessageListAdapter adapter = new SchemaMessageListAdapter(this, bus.messages);
+        adapter = new SchemaMessageListAdapter(this, bus.messages);
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.schemaMessages);
         listView.setAdapter(adapter);
 
+    }
+
+    private void applyMessage(MonitorCanMessage message) {
+        bus.parseMessage(message.getCanMessage());
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -61,8 +69,18 @@ public class CanBusSchemaActivity extends ServiceConnectedActivity implements Ca
     }
 
     @Override
-    public void handleMonitorUpdated(MonitorCanMessage message) {
-        bus.parseMessage(message.getCanMessage());
+    public void handleMonitorUpdated(final MonitorCanMessage message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    applyMessage(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @Override

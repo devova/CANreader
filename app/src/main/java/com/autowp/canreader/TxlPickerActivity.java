@@ -36,10 +36,13 @@ public class TxlPickerActivity extends Activity {
     private void fillFiles(String dir)
     {
         File filesDir = Environment.getExternalStoragePublicDirectory(dir);
-        for (File file : filesDir.listFiles()) {
-            String ext = getFileExt(file.getName());
-            if (ext != null && TxListFile.EXTENSION.equalsIgnoreCase(ext)) {
-                mFiles.add(file);
+        File[] files = filesDir.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                String ext = getFileExt(file.getName());
+                if (ext != null && TxListFile.EXTENSION.equalsIgnoreCase(ext)) {
+                    mFiles.add(file);
+                }
             }
         }
     }
