@@ -29,10 +29,10 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:id="@+id/buttonMonitorClear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_clear"
-                android:id="@+id/buttonMonitorClear" />
+                android:text="@string/action_clear" />
 
         </LinearLayout>
 
@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:clickable="true"
             tools:context=".MonitorFragment"
             tools:listitem="@layout/listitem_monitor" />
 

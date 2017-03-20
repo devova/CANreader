@@ -17,12 +17,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jvit.bus.Bus;
-import com.jvit.parser.JsonParser;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MonitorFragment extends ServiceConnectedFragment {
 
@@ -100,6 +94,17 @@ public class MonitorFragment extends ServiceConnectedFragment {
         }
 
         registerForContextMenu(mListView);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                MonitorCanMessage message = adapter.getItem(position);
+                if (message != null) {
+                    Intent intent = new Intent(getActivity(), MessageActivity.class);
+                    intent.putExtra(MessageActivity.EXTRA_CAN_ID, message.getCanMessage().getId());
+                    startActivity(intent);
+                }
+            }
+        });
 
         Button buttonMonitorClear = (Button) view.findViewById(R.id.buttonMonitorClear);
         buttonMonitorClear.setOnClickListener(new View.OnClickListener() {

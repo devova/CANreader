@@ -202,7 +202,7 @@ public abstract class CanHacker extends CanAdapter {
         if (bytes.length < 5) {
             throw new CanHackerException("Frame response must be >= 5 bytes long");
         }
-        Log.d("CAN", new String(bytes));
+//        Log.d("CAN", new String(bytes));
         Matcher canMatch = CAN_REGEX.matcher(new String(bytes));
 
         boolean isExtended;

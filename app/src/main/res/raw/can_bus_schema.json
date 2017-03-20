@@ -5,12 +5,12 @@
       "id": "0x1A5",
       "signals": {
         "0": {
-          "name": "Volume",
-          "bit_length": 4
-        },
-        "5": {
           "name": "Volume has changed",
-          "bit_length": 1
+          "bit_length": 3
+        },
+        "3": {
+          "name": "Volume",
+          "bit_length": 5
         }
       }
     },
@@ -36,11 +36,13 @@
       "signals": {
         "0": {
           "name": "RPM",
-          "bit_length": 13
+          "bit_length": 16,
+          "factor": 0.125
         },
         "15": {
           "name": "Speed",
-          "bit_length": 16
+          "bit_length": 16,
+          "factor": 0.125
         }
       }
     },
@@ -71,23 +73,24 @@
         },
         "15": {
           "name": "Odometer",
-          "bit_length": 24
+          "bit_length": 24,
+          "factor": 2
         },
-        "55": {
+        "48": {
           "name": "Out Temp",
           "bit_length": 8,
           "factor": 0.5,
-          "offset": -39.5
+          "offset": -39
         },
-        "63": {
+        "56": {
           "name": "Reverse gear light",
           "bit_length": 1
         },
-        "69": {
+        "62": {
           "name": "Turn left light",
           "bit_length": 1
         },
-        "70": {
+        "63": {
           "name": "Turn right light",
           "bit_length": 1
         }
@@ -98,8 +101,12 @@
       "id": "0x261",
       "signals": {
         "0": {
-          "name": "Speed",
+          "name": "AVG Speed",
           "bit_length": 8
+        },
+        "10": {
+          "name": "Vehicle mileage after reset",
+          "bit_length": 14
         },
         "24": {
           "name": "Liters per 100km",
@@ -113,8 +120,12 @@
       "id": "0x2A1",
       "signals": {
         "0": {
-          "name": "Speed",
+          "name": "AVG Speed",
           "bit_length": 8
+        },
+        "10": {
+          "name": "Vehicle mileage after reset",
+          "bit_length": 14
         },
         "24": {
           "name": "Liters per 100km",

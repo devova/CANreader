@@ -1,10 +1,14 @@
 package com.jvit.bus;
 
 
+import android.util.Log;
+
 import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.BitSet;
 
 public class Message {
     public ArrayList<Signal> signals = new ArrayList<>();
@@ -26,24 +30,36 @@ public class Message {
         this.signals.add(signal);
     }
 
-    public ArrayList<Signal> parseFrame(CanMessage frame) {
-        long frameValue = 0;
-
-        for (int i = 0; i < frame.getDLC(); i++) {
-            frameValue = frameValue + (frame.getData()[i] << 8 * i);
+    // Returns a bitset containing the values in bytes.
+    // The byte-ordering of bytes must be big-endian which means the most significant bit is in element 0.
+    public static BitSet fromByteArray(byte[] bytes) {
+        BitSet bits = new BitSet();
+        for (int i=0; i<bytes.length*8; i++) {
+            if ((bytes[bytes.length-i/8-1]&(1<<(i%8))) > 0) {
+                bits.set(i);
+            }
         }
+        return bits;
+    }
 
+    public ArrayList<Signal> parseFrame(CanMessage frame) {
+        int bitCount = frame.getDLC() * 8;
+        BitSet frameValue = fromByteArray(frame.getData());
         ArrayList<Signal> results = new ArrayList<>();
         for (Signal signal: this.signals) {
             int endBit = signal.startBit + signal.bitLength;
-            // compute the mask
-            long mask = 0;
-            for (int i = signal.startBit; i <= endBit; i++) {
-                mask = mask + (int) Math.pow(2, i);
+            if (endBit <= bitCount) {
+                BitSet value = frameValue.get(bitCount - endBit, bitCount - signal.startBit);
+                long[] values = value.toLongArray();
+                if (values.length > 0) {
+                    signal.parseValue(values[0]);
+                } else {
+                    signal.value = 0;
+                }
+                results.add(signal);
+            } else {
+                Log.d("CAN", String.format("Wrong Schema with id: 0x%03X", frame.getId()));
             }
-            int value = (int) (frameValue & mask) >> signal.startBit;
-            signal.parseValue(value);
-            results.add(signal);
         }
 
         return results;

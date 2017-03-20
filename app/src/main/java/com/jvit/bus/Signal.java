@@ -15,7 +15,7 @@ public class Signal {
         this.bitLength = bitLength;
     }
 
-    public void parseValue(int value) {
+    public void parseValue(long value) {
         this.value = value * this.factor + this.offset;
     }
 
