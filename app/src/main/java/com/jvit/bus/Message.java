@@ -50,11 +50,15 @@ public class Message {
             int endBit = signal.startBit + signal.bitLength;
             if (endBit <= bitCount) {
                 BitSet value = frameValue.get(bitCount - endBit, bitCount - signal.startBit);
-                long[] values = value.toLongArray();
-                if (values.length > 0) {
-                    signal.parseValue(values[0]);
+                if (signal.isString) {
+                    signal.strValue = value.toString();
                 } else {
-                    signal.value = 0;
+                    long[] values = value.toLongArray();
+                    if (values.length > 0) {
+                        signal.parseValue(values[0]);
+                    } else {
+                        signal.value = 0;
+                    }
                 }
                 results.add(signal);
             } else {

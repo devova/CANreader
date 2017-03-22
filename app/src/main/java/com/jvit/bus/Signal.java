@@ -8,6 +8,9 @@ public class Signal {
     public double factor = 1;
     public double offset = 0;
     public double value = 0;
+    public String strValue;
+
+    public Boolean isString = false;
 
     public Signal(String name, int startBit, int bitLength) {
         this.name = name;

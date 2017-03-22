@@ -38,6 +38,9 @@ public class JsonParser implements SchemaParser {
                     if (s.has("offset")) {
                         signal.offset = s.getDouble("offset");
                     }
+                    if (s.has("ascii")) {
+                        signal.isString = s.getBoolean("ascii");
+                    }
                     message.addSignal(signal);
                 }
                 bus.addMessage(message);
