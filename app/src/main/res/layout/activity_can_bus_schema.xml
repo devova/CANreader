@@ -24,12 +24,30 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Can Schema"
-            android:textSize="30sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Can Schema"
+                android:textSize="30sp" />
+
+            <ToggleButton
+                android:id="@+id/toggleValuesOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="Values only"
+                android:textOff="values only"
+                android:textOn="full" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/schemaMessages"

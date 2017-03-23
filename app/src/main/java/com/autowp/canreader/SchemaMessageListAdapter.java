@@ -15,6 +15,8 @@ import com.jvit.bus.Signal;
 import java.util.ArrayList;
 
 public class SchemaMessageListAdapter extends ArrayAdapter<Message> {
+    private Boolean showDoc = true;
+
     public SchemaMessageListAdapter(Context context, ArrayList<Message> messages) {
         super(context, 0, messages);
     }
@@ -37,11 +39,15 @@ public class SchemaMessageListAdapter extends ArrayAdapter<Message> {
 
         String signals = "";
         for (Signal s: message.signals) {
-            signals = String.format("%s\n%s", signals, s.toDocString());
+            signals = String.format("%s\n%s", signals, showDoc ? s.toDocString() : s.toString());
         }
         tvSignals.setText(signals);
 
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    public void toggleShowingDoc(Boolean show) {
+        showDoc = show;
     }
 }

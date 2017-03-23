@@ -1,7 +1,9 @@
 package com.autowp.canreader;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ToggleButton;
 
 import com.jvit.bus.Bus;
 import com.jvit.parser.JsonParser;
@@ -43,6 +45,16 @@ public class CanBusSchemaActivity extends ServiceConnectedActivity implements Ca
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.schemaMessages);
         listView.setAdapter(adapter);
+
+        findViewById(R.id.toggleValuesOnly).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ToggleButton b = (ToggleButton) findViewById(R.id.toggleValuesOnly);
+                adapter.toggleShowingDoc(b.isChecked());
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
