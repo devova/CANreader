@@ -41,6 +41,10 @@ public class JsonParser implements SchemaParser {
                     if (s.has("ascii")) {
                         signal.isString = s.getBoolean("ascii");
                     }
+                    if (s.has("choices")) {
+                        signal.isString = true;
+                        signal.choices = s.getJSONObject("choices");
+                    }
                     message.addSignal(signal);
                 }
                 bus.addMessage(message);

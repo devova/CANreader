@@ -22,6 +22,20 @@
           "name": "Position of band in memory",
           "bit_length": 3
         },
+        "8": {
+          "name": "Radio band",
+          "bit_length": 3,
+          "choices": {
+            "0": "---",
+            "1": "FM1",
+            "2": "FM2",
+            "3": "DAB",
+            "4": "---",
+            "5": "AM MediumWave",
+            "6": "AM LongWave",
+            "7": "---"
+          }
+        },
         "12": {
           "name": "Frequency",
           "bit_length": 12,

@@ -6,6 +6,8 @@ import android.util.Log;
 import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
 
+import org.json.JSONException;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -50,14 +52,24 @@ public class Message {
             int endBit = signal.startBit + signal.bitLength;
             if (endBit <= bitCount) {
                 BitSet value = frameValue.get(bitCount - endBit, bitCount - signal.startBit);
-                if (signal.isString) {
-                    signal.strValue = value.toString();
+                long[] values = value.toLongArray();
+                if (values.length > 0) {
+                    signal.parseValue(values[0]);
                 } else {
-                    long[] values = value.toLongArray();
-                    if (values.length > 0) {
-                        signal.parseValue(values[0]);
+                    signal.value = 0;
+                }
+                if (signal.isString) {
+                    if (signal.choices != null) {
+                        String key = String.format("%d", signal.value);
+                        if (signal.choices.has(key)) {
+                            try {
+                                signal.strValue = signal.choices.getString(key);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     } else {
-                        signal.value = 0;
+                        signal.strValue = value.toString();
                     }
                 }
                 results.add(signal);
