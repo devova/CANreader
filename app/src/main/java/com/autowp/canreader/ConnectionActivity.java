@@ -163,14 +163,14 @@ public class ConnectionActivity extends ServiceConnectedActivity implements CanR
 
     private void connectLoopback()
     {
-        CanBusSpecs canBusSpecs = new CanBusSpecs();
+        CanBusSpecs canBusSpecs = new CanBusSpecs(getResources());
         Loopback loopback = new Loopback(canBusSpecs);
         canReaderService.setCanAdapter(loopback);
     }
 
     private void connectUdp()
     {
-        CanBusSpecs canBusSpecs = new CanBusSpecs();
+        CanBusSpecs canBusSpecs = new CanBusSpecs(getResources());
         Baudrate baudrate = (Baudrate) mSpinnerCanBaudrate.getSelectedItem();
         canBusSpecs.setSpeed(baudrate.getValue());
         CanHackerUdp udp = new CanHackerUdp(canBusSpecs);
@@ -189,7 +189,7 @@ public class ConnectionActivity extends ServiceConnectedActivity implements CanR
         try {
             UartBaudrate uartBaudrate = (UartBaudrate)mSpinnerUartBaudrate.getSelectedItem();
 
-            CanBusSpecs canBusSpecs = new CanBusSpecs();
+            CanBusSpecs canBusSpecs = new CanBusSpecs(getResources());
             Baudrate baudrate = (Baudrate) mSpinnerCanBaudrate.getSelectedItem();
             canBusSpecs.setSpeed(baudrate.getValue());
             CanHackerFelhr adapter = new CanHackerFelhr(canBusSpecs, mUsbManager, device, uartBaudrate.getValue());
@@ -205,7 +205,7 @@ public class ConnectionActivity extends ServiceConnectedActivity implements CanR
         System.out.println("connectBluetooth");
 
         try {
-            CanBusSpecs canBusSpecs = new CanBusSpecs();
+            CanBusSpecs canBusSpecs = new CanBusSpecs(getResources());
             Baudrate baudrate = (Baudrate) mSpinnerCanBaudrate.getSelectedItem();
             canBusSpecs.setSpeed(baudrate.getValue());
             CanHackerBluetooth adapter = new CanHackerBluetooth(canBusSpecs, device);

@@ -1,19 +1,21 @@
 package com.jvit.bus;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.util.Log;
 
-import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
 
 import org.json.JSONException;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.HashMap;
 
 public class Message {
-    public ArrayList<Signal> signals = new ArrayList<>();
+
+    HashMap<String, Signal> signals = new HashMap<>();
 
     public String name;
     public int id;
@@ -28,8 +30,16 @@ public class Message {
         this.id = Integer.decode(idHex);
     }
 
+    public String getId() {
+        return String.format("%h", this.id);
+    }
+
     public void addSignal(Signal signal) {
-        this.signals.add(signal);
+        this.signals.put(signal.name, signal);
+    }
+
+    public ArrayList<Signal> getSignals() {
+        return new ArrayList<>(signals.values());
     }
 
     // Returns a bitset containing the values in bytes.
@@ -45,7 +55,7 @@ public class Message {
     }
 
     public Boolean shouldParse() {
-        for (Signal signal: this.signals) {
+        for (Signal signal: this.getSignals()) {
             if (!signal.shouldParse()) {
                 return false;
             }
@@ -53,11 +63,12 @@ public class Message {
         return true;
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public ArrayList<Signal> parseFrame(CanMessage frame) {
         int bitCount = frame.getDLC() * 8;
         BitSet frameValue = fromByteArray(frame.getData());
         ArrayList<Signal> results = new ArrayList<>();
-        for (Signal signal: this.signals) {
+        for (Signal signal: this.getSignals()) {
             if (!signal.shouldParse()) {
                 continue;
             }
@@ -84,6 +95,7 @@ public class Message {
                         signal.strValue = new String(value.toByteArray());
                     }
                 }
+                signal.triggerChangeEvent();
                 results.add(signal);
             } else {
                 Log.d("CAN", String.format("Wrong Schema with id: 0x%03X", frame.getId()));

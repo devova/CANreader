@@ -18,7 +18,12 @@ import com.autowp.can.CanAdapterException;
 import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
 import com.autowp.can.adapter.android.CanHackerFelhr;
+import com.jvit.bus.Bus;
+import com.jvit.parser.JsonParser;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +37,7 @@ import java.util.concurrent.TimeUnit;
 public class CanReaderService extends Service
         implements CanAdapter.OnCanFrameTransferListener, CanAdapter.OnCanMessageTransferListener,
             CanAdapter.CanAdapterEventListener {
+    private Bus bus;
 
     @Override
     public void handleErrorEvent(final CanAdapterException e) {
@@ -208,6 +214,28 @@ public class CanReaderService extends Service
                 toast.show();
             }
         });
+    }
+
+    @Override
+    public void onCreate() {
+        //Get Data From Text Resource File Contains Json Data.
+        InputStream inputStream = getResources().openRawResource(R.raw.can_bus_schema);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        int ctr;
+        try {
+            ctr = inputStream.read();
+            while (ctr != -1) {
+                byteArrayOutputStream.write(ctr);
+                ctr = inputStream.read();
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JsonParser jsonParser = new JsonParser();
+        bus = jsonParser.parse(byteArrayOutputStream);
     }
 
     @Override
@@ -492,6 +520,8 @@ public class CanReaderService extends Service
             monitorFrames.add(monitorFrame);
             triggerMonitor(monitorFrame);
         }
+        bus.parseMessage(canMessage);
+
         triggerMonitor();
 
     }

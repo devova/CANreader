@@ -24,6 +24,7 @@ public class Signal {
     public JSONObject choices;
 
     private List<SignalEventListener> listeners = new ArrayList<>();
+    private Boolean hasChanged = false;
 
 
     public Signal(String name, int startBit, int bitLength) {
@@ -32,13 +33,11 @@ public class Signal {
         this.bitLength = bitLength;
     }
 
-    public void parseValue(long value) {
+    void parseValue(long value) {
         double oldValue = this.value;
         this.value = value * this.factor + this.offset;
-        if (this.value != oldValue) {
-            for (SignalEventListener listener: listeners) {
-                listener.handleSignalChanged(this);
-            }
+        if (!hasChanged && this.value != oldValue) {
+            hasChanged = true;
         }
     }
 
@@ -78,7 +77,16 @@ public class Signal {
         listeners.remove(listener);
     }
 
-    public Boolean shouldParse() {
+    Boolean shouldParse() {
         return listeners.size() > 0;
+    }
+
+    void triggerChangeEvent() {
+        if (hasChanged) {
+            hasChanged = false;
+            for (SignalEventListener listener: listeners) {
+                listener.handleSignalChanged(this);
+            }
+        }
     }
 }

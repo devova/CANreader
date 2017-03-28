@@ -38,7 +38,7 @@ public class SchemaMessageListAdapter extends ArrayAdapter<Message> {
         tvName.setText(message.name);
 
         String signals = "";
-        for (Signal s: message.signals) {
+        for (Signal s: message.getSignals()) {
             signals = String.format("%s\n%s", signals, showDoc ? s.toDocString() : s.toString());
         }
         tvSignals.setText(signals);
