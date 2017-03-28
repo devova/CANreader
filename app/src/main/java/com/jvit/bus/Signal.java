@@ -4,7 +4,15 @@ package com.jvit.bus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Signal {
+
+    public interface SignalEventListener {
+        void handleSignalChanged(Signal signal);
+    }
+
     public String name;
     public int startBit;
     public int bitLength;
@@ -15,6 +23,8 @@ public class Signal {
     public Boolean isString = false;
     public JSONObject choices;
 
+    private List<SignalEventListener> listeners = new ArrayList<>();
+
 
     public Signal(String name, int startBit, int bitLength) {
         this.name = name;
@@ -23,7 +33,13 @@ public class Signal {
     }
 
     public void parseValue(long value) {
+        double oldValue = this.value;
         this.value = value * this.factor + this.offset;
+        if (this.value != oldValue) {
+            for (SignalEventListener listener: listeners) {
+                listener.handleSignalChanged(this);
+            }
+        }
     }
 
     public String getValue() {
@@ -52,5 +68,17 @@ public class Signal {
             }
         }
         return repr;
+    }
+
+    public void addEventListener(SignalEventListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeEventListener(SignalEventListener listener) {
+        listeners.remove(listener);
+    }
+
+    public Boolean shouldParse() {
+        return listeners.size() > 0;
     }
 }

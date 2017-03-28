@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Bus {
     public ArrayList<Message> messages = new ArrayList<>();
 
+    private Boolean forceParsing = false;
+
     public void addMessage(Message message) {
         this.messages.add(message);
     }
@@ -16,11 +18,19 @@ public class Bus {
     public ArrayList<Signal> parseMessage(CanMessage canMessage) {
         ArrayList<Signal> result = new ArrayList<>();
         for (Message message: this.messages) {
-            if (canMessage.getId() == message.id) {
+            if (canMessage.getId() == message.id && (forceParsing || message.shouldParse())) {
                 result = message.parseFrame(canMessage);
                 break;
             }
         }
         return result;
+    }
+
+    public void turnOnForceParsing() {
+        forceParsing = true;
+    }
+
+    public void turnOffForceParsing() {
+        forceParsing = false;
     }
 }

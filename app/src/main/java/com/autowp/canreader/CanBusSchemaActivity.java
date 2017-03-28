@@ -39,6 +39,7 @@ public class CanBusSchemaActivity extends ServiceConnectedActivity implements Ca
 
         JsonParser jsonParser = new JsonParser();
         bus = jsonParser.parse(byteArrayOutputStream);
+        bus.turnOnForceParsing();
 
         // Create the adapter to convert the array to views
         adapter = new SchemaMessageListAdapter(this, bus.messages);
@@ -55,7 +56,12 @@ public class CanBusSchemaActivity extends ServiceConnectedActivity implements Ca
                 adapter.notifyDataSetChanged();
             }
         });
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bus.turnOffForceParsing();
     }
 
     private void applyMessage(MonitorCanMessage message) {

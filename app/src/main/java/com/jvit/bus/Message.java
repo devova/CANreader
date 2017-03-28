@@ -44,11 +44,23 @@ public class Message {
         return bits;
     }
 
+    public Boolean shouldParse() {
+        for (Signal signal: this.signals) {
+            if (!signal.shouldParse()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public ArrayList<Signal> parseFrame(CanMessage frame) {
         int bitCount = frame.getDLC() * 8;
         BitSet frameValue = fromByteArray(frame.getData());
         ArrayList<Signal> results = new ArrayList<>();
         for (Signal signal: this.signals) {
+            if (!signal.shouldParse()) {
+                continue;
+            }
             int endBit = signal.startBit + signal.bitLength;
             if (endBit <= bitCount) {
                 BitSet value = frameValue.get(bitCount - endBit, bitCount - signal.startBit);
@@ -60,7 +72,7 @@ public class Message {
                 }
                 if (signal.isString) {
                     if (signal.choices != null) {
-                        String key = String.format("%d", signal.value);
+                        String key = String.format("%1.0f", signal.value);
                         if (signal.choices.has(key)) {
                             try {
                                 signal.strValue = signal.choices.getString(key);
@@ -69,7 +81,7 @@ public class Message {
                             }
                         }
                     } else {
-                        signal.strValue = value.toString();
+                        signal.strValue = new String(value.toByteArray());
                     }
                 }
                 results.add(signal);
