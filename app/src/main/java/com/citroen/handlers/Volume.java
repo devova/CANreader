@@ -1,19 +1,15 @@
 package com.citroen.handlers;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.widget.Toast;
 
-import com.jvit.bus.Bus;
 import com.jvit.bus.Signal;
 
 
-public class Volume implements Bus.SignalHandler {
-    private Context context;
+public class Volume extends BaseSignalHandler {
 
-    public Volume(Context cntxt) {
-        context = cntxt;
+    public Volume(Context ctx) {
+        super(ctx);
     }
 
     @Override
@@ -27,19 +23,7 @@ public class Volume implements Bus.SignalHandler {
     }
 
     @Override
-    public Signal.SignalEventListener getListener() {
-        return new Signal.SignalEventListener() {
-            @Override
-            public void handleSignalChanged(final Signal signal) {
-                Handler handler = new Handler(Looper.getMainLooper());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Your UI code here
-                        Toast.makeText(context, signal.toString(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        };
+    void handle(Signal signal) {
+        Toast.makeText(context, signal.toString(), Toast.LENGTH_LONG).show();
     }
 }
