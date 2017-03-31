@@ -18,6 +18,7 @@ import com.autowp.can.CanAdapterException;
 import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
 import com.autowp.can.adapter.android.CanHackerFelhr;
+import com.citroen.handlers.Volume;
 import com.jvit.bus.Bus;
 import com.jvit.parser.JsonParser;
 
@@ -236,6 +237,7 @@ public class CanReaderService extends Service
 
         JsonParser jsonParser = new JsonParser();
         bus = jsonParser.parse(byteArrayOutputStream);
+        addSignalHandlers();
     }
 
     @Override
@@ -245,6 +247,10 @@ public class CanReaderService extends Service
             unregisterReceiver(mUsbReceiver);
             mUsbReceiver = null;
         }
+    }
+
+    private void addSignalHandlers() {
+        bus.addSignalHandler(new Volume(getApplicationContext()));
     }
 
     public void setCanAdapter(final CanAdapter adapter) {

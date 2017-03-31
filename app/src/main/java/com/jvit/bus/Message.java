@@ -20,6 +20,8 @@ public class Message {
     public String name;
     public int id;
 
+    private Boolean forceParsing = false;
+
     public Message(String name, int id) {
         this.name = name;
         this.id = id;
@@ -56,11 +58,11 @@ public class Message {
 
     public Boolean shouldParse() {
         for (Signal signal: this.getSignals()) {
-            if (!signal.shouldParse()) {
-                return false;
+            if (signal.shouldParse()) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -69,7 +71,7 @@ public class Message {
         BitSet frameValue = fromByteArray(frame.getData());
         ArrayList<Signal> results = new ArrayList<>();
         for (Signal signal: this.getSignals()) {
-            if (!signal.shouldParse()) {
+            if (!forceParsing && !signal.shouldParse()) {
                 continue;
             }
             int endBit = signal.startBit + signal.bitLength;
@@ -103,6 +105,14 @@ public class Message {
         }
 
         return results;
+    }
+
+    public void turnOnForceParsing() {
+        forceParsing = true;
+    }
+
+    public void turnOffForceParsing() {
+        forceParsing = false;
     }
 
     public String toString() {

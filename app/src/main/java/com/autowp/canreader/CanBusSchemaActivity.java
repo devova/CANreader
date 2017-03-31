@@ -42,7 +42,7 @@ public class CanBusSchemaActivity extends ServiceConnectedActivity implements Ca
         bus.turnOnForceParsing();
 
         // Create the adapter to convert the array to views
-        adapter = new SchemaMessageListAdapter(this, bus.messages);
+        adapter = new SchemaMessageListAdapter(this, bus.getMessages());
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.schemaMessages);
         listView.setAdapter(adapter);
