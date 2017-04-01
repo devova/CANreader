@@ -83,7 +83,7 @@ public class Signal {
 
     void triggerChangeEvent() {
         if (hasChanged) {
-            hasChanged = false;
+//            hasChanged = false;
             for (SignalEventListener listener: listeners) {
                 listener.handleSignalChanged(this);
             }
