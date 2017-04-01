@@ -19,18 +19,18 @@ public abstract class BaseSignalHandler implements Bus.SignalHandler {
     public Signal.SignalEventListener getListener() {
         return new Signal.SignalEventListener() {
             @Override
-            public void handleSignalChanged(final Signal signal) {
+            public void handleSignalChanged(final Signal signal, final Bus bus) {
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         //Your UI code here
-                        handle(signal);
+                        handle(signal, bus);
                     }
                 });
             }
         };
     }
 
-    abstract void handle(Signal signal);
+    abstract void handle(Signal signal, Bus bus);
 }

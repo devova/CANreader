@@ -10,7 +10,7 @@ import java.util.List;
 public class Signal {
 
     public interface SignalEventListener {
-        void handleSignalChanged(Signal signal);
+        void handleSignalChanged(Signal signal, Bus bus);
     }
 
     public String name;
@@ -81,11 +81,11 @@ public class Signal {
         return listeners.size() > 0;
     }
 
-    void triggerChangeEvent() {
+    void triggerChangeEvent(Bus bus) {
         if (hasChanged) {
-//            hasChanged = false;
+            hasChanged = false;
             for (SignalEventListener listener: listeners) {
-                listener.handleSignalChanged(this);
+                listener.handleSignalChanged(this, bus);
             }
         }
     }

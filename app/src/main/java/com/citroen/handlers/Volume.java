@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.autowp.canreader.R;
+import com.jvit.bus.Bus;
 import com.jvit.bus.Signal;
 
 
@@ -29,7 +30,7 @@ public class Volume extends BaseSignalHandler {
     }
 
     @Override
-    void handle(Signal signal) {
+    void handle(Signal signal, Bus bus) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.audio_volume, null);

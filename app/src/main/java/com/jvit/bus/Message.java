@@ -66,7 +66,7 @@ public class Message {
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public ArrayList<Signal> parseFrame(CanMessage frame) {
+    public ArrayList<Signal> parseFrame(CanMessage frame, Bus bus) {
         int bitCount = frame.getDLC() * 8;
         BitSet frameValue = fromByteArray(frame.getData());
         ArrayList<Signal> results = new ArrayList<>();
@@ -97,7 +97,7 @@ public class Message {
                         signal.strValue = new String(value.toByteArray());
                     }
                 }
-                signal.triggerChangeEvent();
+                signal.triggerChangeEvent(bus);
                 results.add(signal);
             } else {
                 Log.d("CAN", String.format("Wrong Schema with id: 0x%03X", frame.getId()));
