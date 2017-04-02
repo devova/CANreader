@@ -15,17 +15,12 @@ import java.util.HashMap;
 
 public class Message {
 
-    HashMap<String, Signal> signals = new HashMap<>();
+    public HashMap<String, Signal> signals = new HashMap<>();
 
     public String name;
     public int id;
 
     private Boolean forceParsing = false;
-
-    public Message(String name, int id) {
-        this.name = name;
-        this.id = id;
-    }
 
     public Message(String name, String idHex) {
         this.name = name;
@@ -70,7 +65,7 @@ public class Message {
         int bitCount = frame.getDLC() * 8;
         BitSet frameValue = fromByteArray(frame.getData());
         ArrayList<Signal> results = new ArrayList<>();
-        for (Signal signal: this.getSignals()) {
+        for (Signal signal: getSignals()) {
             if (!forceParsing && !signal.shouldParse()) {
                 continue;
             }
@@ -97,11 +92,14 @@ public class Message {
                         signal.strValue = new String(value.toByteArray());
                     }
                 }
-                signal.triggerChangeEvent(bus);
                 results.add(signal);
             } else {
                 Log.d("CAN", String.format("Wrong Schema with id: 0x%03X", frame.getId()));
             }
+        }
+        for (Signal signal: getSignals()) {
+            // trigger signal after they all has parsed
+            signal.triggerChangeEvent(bus);
         }
 
         return results;

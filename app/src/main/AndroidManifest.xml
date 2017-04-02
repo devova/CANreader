@@ -73,7 +73,7 @@
 
         <activity android:name=".TxlPickerActivity" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".CanBusSchemaActivity"></activity>
+        <activity android:name=".CanBusSchemaActivity"/>
     </application>
 
 </manifest>

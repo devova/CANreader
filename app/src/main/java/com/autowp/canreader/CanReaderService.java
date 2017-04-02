@@ -18,6 +18,7 @@ import com.autowp.can.CanAdapterException;
 import com.autowp.can.CanFrame;
 import com.autowp.can.CanMessage;
 import com.autowp.can.adapter.android.CanHackerFelhr;
+import com.citroen.handlers.ToastRadioFrequency;
 import com.citroen.handlers.Volume;
 import com.jvit.bus.Bus;
 import com.jvit.parser.JsonParser;
@@ -251,6 +252,7 @@ public class CanReaderService extends Service
 
     private void addSignalHandlers() {
         bus.addSignalHandler(new Volume(getApplicationContext()));
+        bus.addSignalHandler(new ToastRadioFrequency(getApplicationContext()));
     }
 
     public void setCanAdapter(final CanAdapter adapter) {
