@@ -43,8 +43,9 @@ public class ToastRadioFrequency extends BaseSignalHandler {
         TextView textMode = (TextView) layout.findViewById(R.id.textMode);
         textMode.setText(message.signals.get("Radio band").getValue());
 
+        int mem = (int) message.signals.get("Position of band in memory").value;
         TextView textMem = (TextView) layout.findViewById(R.id.textMem);
-        textMem.setText(message.signals.get("Position of band in memory").getValue());
+        textMem.setText(mem > 0 ? String.format("MEM %d", mem) : "");
 
         toast.show();
     }
