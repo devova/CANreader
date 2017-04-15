@@ -13,10 +13,15 @@ import com.jvit.bus.Signal;
 
 
 public class Volume extends BaseSignalHandler {
+    private static final Volume ourInstance = new Volume();
     private Toast toast;
 
-    public Volume(Context ctx) {
-        super(ctx);
+    public Volume() {
+        super();
+    }
+
+    public static Volume getInstance() {
+        return ourInstance;
     }
 
     @Override

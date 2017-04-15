@@ -15,12 +15,17 @@ import com.jvit.bus.Message;
 import com.jvit.bus.Signal;
 
 public class ToastRadioFrequency extends BaseSignalHandler {
+    private static final ToastRadioFrequency ourInstance = new ToastRadioFrequency();
     private Toast toast;
     private View layout;
-    public ToastRadioFrequency(Context ctx) {
-        super(ctx);
+    public ToastRadioFrequency() {
+        super();
         createLayout();
         createToast();
+    }
+
+    public static ToastRadioFrequency getInstance() {
+        return ourInstance;
     }
 
     @Override

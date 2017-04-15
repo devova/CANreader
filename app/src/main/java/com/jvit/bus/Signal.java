@@ -23,7 +23,7 @@ public class Signal {
     public Boolean isString = false;
     public JSONObject choices;
 
-    private List<SignalEventListener> listeners = new ArrayList<>();
+    public ArrayList<SignalEventListener> listeners = new ArrayList<>();
     private Boolean hasChanged = false;
 
 

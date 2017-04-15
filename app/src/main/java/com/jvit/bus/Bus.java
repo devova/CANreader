@@ -60,4 +60,14 @@ public class Bus {
             }
         }
     }
+
+    public void removeSignalHandler(SignalHandler signalHandler) {
+        Message msg = messages.get(signalHandler.getMessageId());
+        if (msg != null) {
+            Signal signal = msg.signals.get(signalHandler.getSignalName());
+            if (signal != null) {
+                signal.removeEventListener(signalHandler.getListener());
+            }
+        }
+    }
 }

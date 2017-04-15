@@ -11,8 +11,11 @@ import com.jvit.bus.Signal;
 public abstract class BaseSignalHandler implements Bus.SignalHandler {
     protected Context context;
 
-    public BaseSignalHandler(Context ctx) {
+    public BaseSignalHandler() {}
+
+    public BaseSignalHandler setContext(Context ctx) {
         context = ctx;
+        return this;
     }
 
     @Override

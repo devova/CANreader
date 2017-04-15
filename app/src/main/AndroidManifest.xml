@@ -73,7 +73,14 @@
 
         <activity android:name=".TxlPickerActivity" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".CanBusSchemaActivity"/>
+        <activity android:name=".CanBusSchemaActivity" />
+        <activity android:name=".RadioActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

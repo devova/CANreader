@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 public class CanReaderService extends Service
         implements CanAdapter.OnCanFrameTransferListener, CanAdapter.OnCanMessageTransferListener,
             CanAdapter.CanAdapterEventListener {
-    private Bus bus;
+    public Bus bus;
 
     @Override
     public void handleErrorEvent(final CanAdapterException e) {
@@ -251,8 +251,8 @@ public class CanReaderService extends Service
     }
 
     private void addSignalHandlers() {
-        bus.addSignalHandler(new Volume(getApplicationContext()));
-        bus.addSignalHandler(new ToastRadioFrequency(getApplicationContext()));
+        bus.addSignalHandler(Volume.getInstance().setContext(getApplicationContext()));
+        bus.addSignalHandler(ToastRadioFrequency.getInstance().setContext(getApplicationContext()));
     }
 
     public void setCanAdapter(final CanAdapter adapter) {
