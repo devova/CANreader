@@ -6,19 +6,43 @@
     android:layout_height="match_parent"
     tools:context="com.autowp.canreader.RadioActivity">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/audio_icon"
+        tools:layout_editor_absoluteY="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/radioFrequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:drawable/alert_dark_frame"
         android:fontFamily="monospace"
-        android:text="107.2"
+        android:paddingLeft="90dp"
+        android:paddingRight="20dp"
+        android:text="107.2 MHz"
         android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/radioMem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="556dp"
+        android:fontFamily="monospace"
+        android:text="MEM 1"
+        android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="@+id/radioFrequency"
+        tools:layout_editor_absoluteY="220dp" />
+
 </android.support.constraint.ConstraintLayout>

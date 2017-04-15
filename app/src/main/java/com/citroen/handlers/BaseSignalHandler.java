@@ -35,5 +35,5 @@ public abstract class BaseSignalHandler implements Bus.SignalHandler {
         };
     }
 
-    abstract void handle(Signal signal, Bus bus);
+    public abstract void handle(Signal signal, Bus bus);
 }

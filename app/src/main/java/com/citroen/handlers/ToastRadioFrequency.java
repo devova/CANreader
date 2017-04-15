@@ -39,7 +39,7 @@ public class ToastRadioFrequency extends BaseSignalHandler {
     }
 
     @Override
-    void handle(Signal signal, Bus bus) {
+    public void handle(Signal signal, Bus bus) {
         Message message = bus.messages.get(getMessageId());
 
         TextView textFrequency = (TextView) layout.findViewById(R.id.textFrequency);
