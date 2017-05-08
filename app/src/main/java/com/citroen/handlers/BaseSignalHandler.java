@@ -3,7 +3,6 @@ package com.citroen.handlers;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
 import com.jvit.bus.Bus;
 import com.jvit.bus.Signal;
@@ -11,6 +10,7 @@ import com.jvit.bus.Signal;
 public abstract class BaseSignalHandler implements Bus.SignalHandler {
     protected Context context;
     private Signal.SignalEventListener listener;
+    private String lastValue;
 
     public BaseSignalHandler() {}
 
@@ -19,12 +19,17 @@ public abstract class BaseSignalHandler implements Bus.SignalHandler {
         return this;
     }
 
+    public String getLastValue() {
+        return lastValue;
+    }
+
     @Override
     public Signal.SignalEventListener getListener() {
         if (listener == null) {
             listener = new Signal.SignalEventListener() {
                 @Override
                 public void handleSignalChanged(final Signal signal, final Bus bus) {
+                    lastValue = signal.getValue();
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.post(new Runnable() {
                         @Override

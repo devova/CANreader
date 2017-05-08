@@ -4,6 +4,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.citroen.commands.EnsureSource;
+import com.citroen.handlers.Source;
 import com.citroen.handlers.ToastRadioFrequency;
 import com.citroen.handlers.radioActivity.*;
 
@@ -13,6 +15,15 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (!Source.getInstance().getLastValue().equals("Tuner")) {
+            EnsureSource command = new EnsureSource(canReaderService,"Tuner");
+            command.execute();
+        }
     }
 
     protected void setHandlers() {
@@ -48,7 +59,6 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         unsetHandlers();
         canReaderService.removeListener(this);
     }
-
 
     @Override
     public void handleMonitorUpdated() {
