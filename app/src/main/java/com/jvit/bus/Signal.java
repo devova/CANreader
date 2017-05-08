@@ -70,7 +70,9 @@ public class Signal {
     }
 
     public void addEventListener(SignalEventListener listener) {
-        listeners.add(listener);
+        if (!listeners.contains(listener)) {
+            listeners.add(listener);
+        }
     }
 
     public void removeEventListener(SignalEventListener listener) {

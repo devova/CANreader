@@ -18,10 +18,9 @@ public class ToastRadioFrequency extends BaseSignalHandler {
     private static final ToastRadioFrequency ourInstance = new ToastRadioFrequency();
     private Toast toast;
     private View layout;
+    private Boolean inited = false;
     public ToastRadioFrequency() {
         super();
-        createLayout();
-        createToast();
     }
 
     public static ToastRadioFrequency getInstance() {
@@ -40,6 +39,11 @@ public class ToastRadioFrequency extends BaseSignalHandler {
 
     @Override
     public void handle(Signal signal, Bus bus) {
+        if (!inited) {
+            createLayout();
+            createToast();
+            inited = true;
+        }
         Message message = bus.messages.get(getMessageId());
 
         TextView textFrequency = (TextView) layout.findViewById(R.id.textFrequency);

@@ -10,6 +10,7 @@ import com.jvit.bus.Signal;
 
 public abstract class BaseSignalHandler implements Bus.SignalHandler {
     protected Context context;
+    private Signal.SignalEventListener listener;
 
     public BaseSignalHandler() {}
 
@@ -20,19 +21,22 @@ public abstract class BaseSignalHandler implements Bus.SignalHandler {
 
     @Override
     public Signal.SignalEventListener getListener() {
-        return new Signal.SignalEventListener() {
-            @Override
-            public void handleSignalChanged(final Signal signal, final Bus bus) {
-                Handler handler = new Handler(Looper.getMainLooper());
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Your UI code here
-                        handle(signal, bus);
-                    }
-                });
-            }
-        };
+        if (listener == null) {
+            listener = new Signal.SignalEventListener() {
+                @Override
+                public void handleSignalChanged(final Signal signal, final Bus bus) {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Your UI code here
+                            handle(signal, bus);
+                        }
+                    });
+                }
+            };
+        }
+        return listener;
     }
 
     public abstract void handle(Signal signal, Bus bus);

@@ -13,8 +13,12 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
+    }
+
+    protected void setHandlers() {
         Typeface tf = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/digital_7.ttf");
-        canReaderService.bus.removeSignalHandler(ToastRadioFrequency.getInstance());
+        canReaderService.bus.removeSignalHandler(
+                ToastRadioFrequency.getInstance().setContext(getApplicationContext()));
 
         TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
         radioFreq.setTypeface(tf);
@@ -27,20 +31,21 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
                 Memory.getInstance().setView(radioMem));
     }
 
-    protected void onStop() {
+    protected void unsetHandlers() {
         canReaderService.bus.removeSignalHandler(Memory.getInstance());
         canReaderService.bus.removeSignalHandler(Frequency.getInstance());
         canReaderService.bus.addSignalHandler(ToastRadioFrequency.getInstance());
-        super.onStop();
     }
 
     @Override
     protected void afterConnect() {
         canReaderService.addListener(this);
+        setHandlers();
     }
 
     @Override
     protected void beforeDisconnect() {
+        unsetHandlers();
         canReaderService.removeListener(this);
     }
 

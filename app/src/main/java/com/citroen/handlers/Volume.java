@@ -35,7 +35,7 @@ public class Volume extends BaseSignalHandler {
     }
 
     @Override
-    void handle(Signal signal, Bus bus) {
+    public void handle(Signal signal, Bus bus) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.audio_volume, null);
