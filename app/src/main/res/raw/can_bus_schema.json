@@ -18,7 +18,7 @@
       "name": "Radio status",
       "id": "0x165",
       "signals": {
-        "16": {
+        "17": {
           "name": "Source",
           "bit_length": 3,
           "choices": {

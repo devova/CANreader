@@ -10,7 +10,7 @@ import com.jvit.bus.Signal;
 public abstract class BaseSignalHandler implements Bus.SignalHandler {
     protected Context context;
     private Signal.SignalEventListener listener;
-    private String lastValue;
+    private String lastValue = "";
 
     public BaseSignalHandler() {}
 
