@@ -8,6 +8,7 @@ import com.citroen.commands.EnsureSource;
 import com.citroen.handlers.Source;
 import com.citroen.handlers.ToastRadioFrequency;
 import com.citroen.handlers.radioActivity.*;
+import com.jvit.bus.Signal;
 
 public class RadioActivity extends ServiceConnectedActivity implements CanReaderService.OnMonitorChangedListener {
 
@@ -20,6 +21,9 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
     @Override
     protected void onPostResume() {
         super.onPostResume();
+
+//        TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
+//        radioFreq.setText(ToastRadioFrequency.getInstance().getLastValue());
         if (!Source.getInstance().getLastValue().equals("Tuner")) {
             EnsureSource command = new EnsureSource(canReaderService,"Tuner");
             command.execute();
@@ -33,13 +37,15 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
 
         TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
         radioFreq.setTypeface(tf);
-        canReaderService.bus.addSignalHandler(
+        Signal signal = canReaderService.bus.addSignalHandler(
                 Frequency.getInstance().setView(radioFreq));
+        Frequency.getInstance().handle(signal, null);
 
         TextView radioMem = (TextView) findViewById(R.id.radioMem);
         radioMem.setTypeface(tf);
-        canReaderService.bus.addSignalHandler(
+        signal = canReaderService.bus.addSignalHandler(
                 Memory.getInstance().setView(radioMem));
+        Memory.getInstance().handle(signal, null);
     }
 
     protected void unsetHandlers() {

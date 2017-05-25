@@ -168,6 +168,40 @@
       }
     },
     {
+      "name": "Radio keypad",
+      "id": "0x3E5",
+      "signals": {
+        "1": {
+          "name": "Menu",
+          "bit_length": 1
+        },
+        "3": {
+          "name": "Mode",
+          "bit_length": 1
+        },
+        "6": {
+          "name": "Rigth",
+          "bit_length": 1
+        },
+        "7": {
+          "name": "Left",
+          "bit_length": 1
+        },
+        "8": {
+          "name": "OK",
+          "bit_length": 1
+        },
+        "9": {
+          "name": "Back",
+          "bit_length": 1
+        },
+        "16": {
+          "name": "Rotator Position",
+          "bit_length": 8
+        }
+      }
+    },
+    {
       "name": "First 3 letters of VIN",
       "id": "0x336",
       "signals": {

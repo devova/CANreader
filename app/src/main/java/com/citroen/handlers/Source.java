@@ -32,6 +32,7 @@ public class Source extends BaseSignalHandler {
     public void handle(Signal signal, Bus bus) {
         if (signal.getValue().equals("Tuner")) {
             Intent intent = new Intent(context, RadioActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
     }

@@ -45,6 +45,10 @@ public class Signal {
         return this.isString ? this.strValue : String.format("%2.1f", this.value);
     }
 
+    public String getValue(String format) {
+        return this.isString ? this.strValue : String.format(format, this.value);
+    }
+
     public String toString() {
         return String.format("%s: %s", this.name, this.getValue());
     }

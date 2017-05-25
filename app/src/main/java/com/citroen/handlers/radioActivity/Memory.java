@@ -25,7 +25,7 @@ public class Memory extends TextViewBaseSignalHandler {
     @Override
     protected String getString(Signal signal, Bus bus) {
         if (signal.value > 0) {
-            return String.format("MEM %s", super.getString(signal, bus));
+            return String.format("MEM %s", signal.getValue("%2.0f"));
         }
         return "";
     }
