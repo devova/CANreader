@@ -36,7 +36,12 @@ public abstract class Command {
 
     public void execute() {
         TransmitCanFrame frame = getNextCanFrame();
-        TransmitRunnable runnable = new TransmitRunnable(frame);
+        while (frame != null) {
+            canReaderService.transmit(frame);
+            Thread.sleep(frame.period)
+            TransmitCanFrame frame = getNextCanFrame();
+        }
+//        TransmitRunnable runnable = new TransmitRunnable(frame);
 //        Future<?> future = threadsPool.schedule(runnable, 0, TimeUnit.MILLISECONDS);
 //        future.
     }

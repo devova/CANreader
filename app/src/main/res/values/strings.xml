@@ -34,4 +34,7 @@
     <string name="action_monitor_focus">Focus view</string>
     <string name="connection_udp">Network</string>
     <string name="connection_bluetooth">Bluetooth</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

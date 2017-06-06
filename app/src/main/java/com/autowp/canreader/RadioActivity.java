@@ -24,10 +24,8 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
 
 //        TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
 //        radioFreq.setText(ToastRadioFrequency.getInstance().getLastValue());
-        if (!Source.getInstance().getLastValue().equals("Tuner")) {
-            EnsureSource command = new EnsureSource(canReaderService,"Tuner");
-            command.execute();
-        }
+        EnsureSource command = new EnsureSource(canReaderService,"Tuner");
+        command.execute();
     }
 
     protected void setHandlers() {
