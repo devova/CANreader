@@ -27,7 +27,12 @@ public class Mode extends BaseButton {
     }
 
     @Override
-    public int getKeyCode(Signal signal) {
-        return KeyEvent.KEYCODE_APP_SWITCH;
+    public boolean isKeyEvent() {
+        return true;
+    }
+
+    @Override
+    public KeyEvent getKeyEvent(Signal signal) {
+        return new KeyEvent(1, 2, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_TAB, 0, KeyEvent.META_ALT_ON);
     }
 }

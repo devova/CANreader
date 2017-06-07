@@ -2,6 +2,7 @@ package com.citroen.handlers.buttons;
 
 
 import android.app.Instrumentation;
+import android.view.KeyEvent;
 
 import com.citroen.handlers.BaseSignalHandler;
 import com.jvit.bus.Bus;
@@ -15,11 +16,25 @@ public abstract class BaseButton extends BaseSignalHandler {
                 @Override
                 public void run() {
                     Instrumentation inst = new Instrumentation();
-                    inst.sendKeyDownUpSync(getKeyCode(signal));
+                    if (isKeyEvent()){
+                        inst.sendKeySync(getKeyEvent(signal));
+                    } else {
+                        inst.sendKeyDownUpSync(getKeyCode(signal));
+                    }
                 }
             }).start();
         }
     }
 
-    public abstract int getKeyCode(Signal signal);
+    public int getKeyCode(Signal signal) {
+        return 0;
+    }
+
+    public KeyEvent getKeyEvent(Signal signal) {
+        return null;
+    }
+
+    public boolean isKeyEvent() {
+        return false;
+    }
 }
