@@ -15,6 +15,7 @@ import com.jvit.bus.Signal;
 
 public class RadioActivity extends ServiceConnectedActivity implements CanReaderService.OnMonitorChangedListener,
         CanReaderService.OnConnectionStateChangedListener {
+    static public boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,7 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
     @Override
     protected void onPostResume() {
         super.onPostResume();
-
-//        TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
-//        radioFreq.setText(ToastRadioFrequency.getInstance().getLastValue());
-
+        active = true;
     }
 
     protected void setHandlers() {
@@ -78,6 +76,7 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
 
     @Override
     protected void beforeDisconnect() {
+        active = false;
         unsetHandlers();
         canReaderService.removeListener((CanReaderService.OnConnectionStateChangedListener) this);
         canReaderService.removeListener((CanReaderService.OnMonitorChangedListener) this);

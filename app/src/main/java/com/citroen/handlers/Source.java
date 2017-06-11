@@ -30,7 +30,7 @@ public class Source extends BaseSignalHandler {
 
     @Override
     public void handle(Signal signal, Bus bus) {
-        if (signal.getValue().equals("Tuner")) {
+        if (signal.getValue().equals("Tuner") && !RadioActivity.active) {
             Intent intent = new Intent(context, RadioActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
