@@ -164,7 +164,7 @@
           "bit_length": 8
         },
         "10": {
-          "name": "Vehicle mileage after reset",
+          "name": "Distance",
           "bit_length": 14
         },
         "24": {
@@ -183,7 +183,7 @@
           "bit_length": 8
         },
         "10": {
-          "name": "Vehicle mileage after reset",
+          "name": "Distance",
           "bit_length": 14
         },
         "24": {

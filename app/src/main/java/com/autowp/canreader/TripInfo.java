@@ -7,6 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.citroen.handlers.radioActivity.AVG1Distance;
+import com.citroen.handlers.radioActivity.AVG1FuelConsumption;
+import com.citroen.handlers.radioActivity.AVG1Speed;
+import com.jvit.bus.Signal;
 
 
 /**
@@ -17,7 +23,7 @@ import android.view.ViewGroup;
  * Use the {@link TripInfo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TripInfo extends Fragment {
+public class TripInfo extends ServiceConnectedFragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,6 +95,33 @@ public class TripInfo extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    protected void setHandlers() {
+        TextView tripFuelConsumption = (TextView) getActivity().findViewById(R.id.tripFuelConsumption);
+        Signal signal = canReaderService.bus.addSignalHandler(
+                AVG1FuelConsumption.getInstance().setView(tripFuelConsumption));
+        AVG1FuelConsumption.getInstance().handle(signal, null);
+
+        TextView tripAvgSpeed = (TextView) getActivity().findViewById(R.id.tripAvgSpeed);
+        signal = canReaderService.bus.addSignalHandler(
+                AVG1Speed.getInstance().setView(tripAvgSpeed));
+        AVG1Speed.getInstance().handle(signal, null);
+
+        TextView tripDistance = (TextView) getActivity().findViewById(R.id.tripDistance);
+        signal = canReaderService.bus.addSignalHandler(
+                AVG1Distance.getInstance().setView(tripDistance));
+        AVG1Distance.getInstance().handle(signal, null);
+    }
+
+    @Override
+    protected void afterConnect() {
+        setHandlers();
+    }
+
+    @Override
+    protected void beforeDisconnect() {
+
     }
 
     /**
