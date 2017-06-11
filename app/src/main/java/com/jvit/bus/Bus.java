@@ -31,7 +31,7 @@ public class Bus {
         Message message = messages.get(String.format("%h", canMessage.getId()));
         if (message != null) {
             if (forceParsing || message.shouldParse()) {
-                result = message.parseFrame(canMessage, this);
+                result = message.parseMessage(canMessage, this);
             }
         }
         return result;

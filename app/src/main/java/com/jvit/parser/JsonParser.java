@@ -22,7 +22,9 @@ public class JsonParser implements SchemaParser {
 
             for (int i=0; i < messages.length(); i++) {
                 JSONObject m = messages.getJSONObject(i);
-                Message message = new Message(m.getString("name"), m.getString("id"));
+                boolean multiframe = m.has("multiframe") && m.getBoolean("multiframe");
+                Message message = new Message(
+                        m.getString("name"), m.getString("id"), multiframe);
                 JSONObject signals = m.getJSONObject("signals");
 
                 JSONArray signalStartBits = signals.names();
