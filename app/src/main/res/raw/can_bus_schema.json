@@ -130,7 +130,33 @@
       }
     },
     {
-      "name": "AVG 1",
+      "name": "Trip Current",
+      "id": "0x221",
+      "signals": {
+        "0": {
+          "name": "when liters per 100 km is ---",
+          "bit_length": 1
+        },
+        "1": {
+          "name": "when rest of run is ---",
+          "bit_length": 1
+        },
+        "4": {
+          "name": "when trip mode switch down",
+          "bit_length": 1
+        },
+        "8": {
+          "name": "Liters per 100km",
+          "bit_length": 16
+        },
+        "24": {
+          "name": "Rest of run on current fuel level",
+          "bit_length": 16
+        }
+      }
+    },
+    {
+      "name": "Trip AVG 1",
       "id": "0x261",
       "signals": {
         "0": {
@@ -149,7 +175,7 @@
       }
     },
     {
-      "name": "AVG 2",
+      "name": "Trip AVG 2",
       "id": "0x2A1",
       "signals": {
         "0": {
@@ -209,6 +235,22 @@
           "name": "VIN1",
           "bit_length": 24,
           "ascii": true
+        }
+      }
+    },
+    {
+      "name": "Cellphone call status",
+      "id": "0x223",
+      "signals": {
+        "8": {
+          "name": "Minutes",
+          "bit_length": 8,
+          "factor": 0.25
+        },
+        "16": {
+          "name": "Seconds",
+          "bit_length": 8,
+          "factor": 0.25
         }
       }
     }
