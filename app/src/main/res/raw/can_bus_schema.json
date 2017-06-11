@@ -260,6 +260,10 @@
       "multiframe": true,
       "signals": {
         "0": {
+          "name": "type",
+          "bit_length": 8
+        },
+        "8": {
           "name": "text",
           "bit_length": -1,
           "ascii": true

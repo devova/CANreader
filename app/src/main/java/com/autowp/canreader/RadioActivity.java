@@ -2,6 +2,8 @@ package com.autowp.canreader;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.autowp.can.CanAdapter;
@@ -16,6 +18,8 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
     }
@@ -45,6 +49,12 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         signal = canReaderService.bus.addSignalHandler(
                 Memory.getInstance().setView(radioMem));
         Memory.getInstance().handle(signal, null);
+
+        TextView textRadio = (TextView) findViewById(R.id.textRadio);
+        textRadio.setTypeface(tf);
+        signal = canReaderService.bus.addSignalHandler(
+                RadioText.getInstance().setView(textRadio));
+        RadioText.getInstance().handle(signal, null);
     }
 
     protected void unsetHandlers() {

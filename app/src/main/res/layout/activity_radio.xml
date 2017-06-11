@@ -7,21 +7,29 @@
     tools:context="com.autowp.canreader.RadioActivity">
 
     <ImageView
+        android:id="@+id/imageBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg1"
+        android:src="@drawable/bg1"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
         android:id="@+id/imageView3"
         android:layout_width="254dp"
         android:layout_height="231dp"
-        android:src="@drawable/audio_icon"
-        app:layout_constraintEnd_toEndOf="@+id/radioFrequency"
-        app:layout_constraintBottom_toBottomOf="@+id/radioFrequency"
         android:layout_marginBottom="276dp"
-        android:layout_marginEnd="196dp" />
+        android:layout_marginEnd="196dp"
+        android:src="@drawable/audio_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/radioFrequency"
+        app:layout_constraintEnd_toEndOf="@+id/radioFrequency"/>
 
     <TextView
         android:id="@+id/radioFrequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/lens_flare_right_blue"
         android:fontFamily="monospace"
@@ -30,7 +38,7 @@
         android:paddingRight="20dp"
         android:paddingTop="40dp"
         android:text="107.2 MHz"
-        android:textSize="80sp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498" />
@@ -44,18 +52,50 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/radioFrequency"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/radioFrequency"
-        android:layout_marginBottom="352dp" />
+        tools:layout_editor_absoluteX="793dp"
+        app:layout_constraintTop_toTopOf="@+id/radioFrequency"
+        android:layout_marginTop="217dp" />
+
+    <TextView
+        android:id="@+id/textRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="330dp"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:text="super very long text with nothing"
+        android:textSize="27sp"
+        android:typeface="sans"
+        app:layout_constraintRight_toRightOf="@+id/radioMem"
+        app:layout_constraintTop_toTopOf="@+id/radioFrequency" />
 
     <fragment
         android:id="@+id/tripFragment1"
-        android:name="com.autowp.canreader.TripInfo"
-        class="com.autowp.canreader.TripInfo"
+        android:name="com.autowp.canreader.TripInfo1Fragment"
+        class="com.autowp.canreader.TripInfo1Fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_trip_info"
-        tools:layout_editor_absoluteY="29dp" />
+        tools:layout_editor_absoluteX="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+        android:layout_marginBottom="48dp" />
+
+    <fragment
+        android:id="@+id/tripFragment2"
+        android:name="com.autowp.canreader.TripInfo2Fragment"
+        class="com.autowp.canreader.TripInfo2Fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_trip_info"
+        tools:layout_editor_absoluteX="46dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+        android:layout_marginBottom="8dp" />
 
 </android.support.constraint.ConstraintLayout>

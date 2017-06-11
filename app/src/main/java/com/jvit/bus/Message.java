@@ -7,11 +7,15 @@ import android.util.Log;
 
 import com.autowp.can.CanMessage;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class Message {
 
@@ -100,7 +104,9 @@ public class Message {
                             }
                         }
                     } else {
-                        signal.strValue = new String(value.toByteArray());
+                        byte[] byteArr = value.toByteArray();
+                        ArrayUtils.reverse(byteArr);
+                        signal.strValue = new String(byteArr);
                     }
                 }
                 results.add(signal);

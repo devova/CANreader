@@ -19,7 +19,7 @@ public class Signal {
     public double factor = 1;
     public double offset = 0;
     public double value = 0;
-    public String strValue;
+    public String strValue = "";
     public Boolean isString = false;
     public JSONObject choices;
 
