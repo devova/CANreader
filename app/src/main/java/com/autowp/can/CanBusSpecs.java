@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 import com.autowp.canreader.R;
 import com.jvit.bus.Bus;
+import com.jvit.bus.Message;
 import com.jvit.parser.JsonParser;
 
 import java.io.ByteArrayOutputStream;
@@ -12,8 +13,6 @@ import java.io.InputStream;
 
 public class CanBusSpecs {
     protected int speed; // kbit
-    
-    protected int[] multiframeAbitrationID = new int[0];
 
     public Bus bus;
 
@@ -49,14 +48,7 @@ public class CanBusSpecs {
     
     public boolean isMultiFrame(int id)
     {
-        boolean result = false;
-        for (int i=0; i<multiframeAbitrationID.length; i++) {
-            if (multiframeAbitrationID[i] == id) {
-                result = true;
-                break;
-            }
-        }
-        
-        return result;
+        Message msg = bus.messages.get(Integer.toHexString(id));
+        return (msg != null) && (msg.isMultiframe());
     }
 }

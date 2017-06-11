@@ -19,12 +19,14 @@ public class Message {
 
     public String name;
     public int id;
+    private boolean multiframe = false;
 
     private Boolean forceParsing = false;
 
-    public Message(String name, String idHex) {
+    public Message(String name, String idHex, boolean multiframe) {
         this.name = name;
         this.id = Integer.decode(idHex);
+        this.multiframe = multiframe;
     }
 
     public String getId() {
@@ -60,16 +62,25 @@ public class Message {
         return false;
     }
 
+    public boolean isMultiframe() {
+        return multiframe;
+    }
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    public ArrayList<Signal> parseFrame(CanMessage frame, Bus bus) {
-        int bitCount = frame.getDLC() * 8;
-        BitSet frameValue = fromByteArray(frame.getData());
+    public ArrayList<Signal> parseMessage(CanMessage message, Bus bus) {
+        int bitCount = message.getDLC() * 8;
+        BitSet frameValue = fromByteArray(message.getData());
         ArrayList<Signal> results = new ArrayList<>();
         for (Signal signal: getSignals()) {
             if (!forceParsing && !signal.shouldParse()) {
                 continue;
             }
-            int endBit = signal.startBit + signal.bitLength;
+            int endBit;
+            if (signal.bitLength == -1) {
+                endBit = bitCount;
+            } else {
+                endBit = signal.startBit + signal.bitLength;
+            }
             if (endBit <= bitCount) {
                 BitSet value = frameValue.get(bitCount - endBit, bitCount - signal.startBit);
                 long[] values = value.toLongArray();
@@ -94,7 +105,7 @@ public class Message {
                 }
                 results.add(signal);
             } else {
-                Log.d("CAN", String.format("Wrong Schema with id: 0x%03X", frame.getId()));
+                Log.d("CAN", String.format("Wrong Schema with id: 0x%03X", message.getId()));
             }
         }
         for (Signal signal: getSignals()) {

@@ -253,6 +253,18 @@
           "factor": 0.25
         }
       }
+    },
+    {
+      "name": "Current track name, radiotext",
+      "id": "0x0a4",
+      "multiframe": true,
+      "signals": {
+        "0": {
+          "name": "text",
+          "bit_length": -1,
+          "ascii": true
+        }
+      }
     }
   ]
 }
