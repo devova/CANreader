@@ -156,6 +156,8 @@ public class MainActivity extends ServiceConnectedActivity {
             }
 
             case R.id.action_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
 
             case R.id.action_about: {

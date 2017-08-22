@@ -269,6 +269,64 @@
           "ascii": true
         }
       }
-    }
+    },
+    {
+      "name": "PhoneRing",
+      "id": "0x123",
+      "multiframe": true,
+      "signals": {
+        "0": {
+          "name": "status",
+          "bit_length": 8,
+          "choices": {
+            "16": "Idle",
+            "20": "Incoming call",
+            "21": "Dialing in progress",
+            "22": "On call"
+          }
+        },
+        "8": {
+          "name": "text",
+          "bit_length": -1,
+          "ascii": true
+        }
+      }
+    },
+    {
+      "name": "Adress Book, Call List",
+      "id": "0x163",
+      "multiframe": true,
+      "signals": {
+        "0": {
+          "name": "b0",
+          "bit_length": 8
+        },
+        "8": {
+          "name": "b1",
+          "bit_length": 8
+        },
+        "16": {
+          "name": "b2",
+          "bit_length": 8
+        },
+        "24": {
+          "name": "b3",
+          "bit_length": 8
+        },
+        "32": {
+          "name": "b4",
+          "bit_length": 8
+        },
+        "40": {
+          "name": "b6",
+          "bit_length": 8
+        },
+        "48": {
+          "name": "text",
+          "bit_length": -1,
+          "ascii": true
+        }
+      }
+    },
   ]
 }
