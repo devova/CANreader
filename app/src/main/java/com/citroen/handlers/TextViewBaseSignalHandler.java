@@ -7,7 +7,7 @@ import com.jvit.bus.Signal;
 
 
 public abstract class TextViewBaseSignalHandler extends BaseSignalHandler {
-    private TextView textView;
+    protected TextView textView;
 
     public TextViewBaseSignalHandler setView(TextView view) {
         textView = view;

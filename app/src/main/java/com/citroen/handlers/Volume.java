@@ -31,7 +31,7 @@ public class Volume extends BaseSignalHandler {
 
     @Override
     public String getSignalName() {
-        return "Volume";
+        return "Volume has changed";
     }
 
     @Override
@@ -40,8 +40,9 @@ public class Volume extends BaseSignalHandler {
                 Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.audio_volume, null);
 
+        Signal volumeSignal = bus.messages.get(getMessageId()).signals.get("Volume");
         ProgressBar progressBar = (ProgressBar) layout.findViewById(R.id.progressBar);
-        progressBar.setProgress((int) signal.value);
+        progressBar.setProgress((int) volumeSignal.value);
 
         if (toast == null) {
             toast = new Toast(context);

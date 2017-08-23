@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.autowp.can.CanAdapter;
 import com.citroen.commands.EnsureSource;
-import com.citroen.handlers.Source;
 import com.citroen.handlers.ToastRadioFrequency;
 import com.citroen.handlers.radioActivity.*;
 import com.jvit.bus.Signal;
@@ -52,6 +51,7 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         textRadio.setTypeface(tf);
         signal = canReaderService.bus.addSignalHandler(
                 RadioText.getInstance().setView(textRadio));
+        RadioText.getInstance().setFrequencyView(radioFreq);
         RadioText.getInstance().handle(signal, null);
 
         TextView textOutTemp = (TextView) findViewById(R.id.textOutTemp);
