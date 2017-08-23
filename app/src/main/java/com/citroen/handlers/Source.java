@@ -1,8 +1,10 @@
 package com.citroen.handlers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import com.autowp.canreader.RadioActivity;
+import com.autowp.canreader.SettingsActivity;
 import com.jvit.bus.Bus;
 import com.jvit.bus.Signal;
 
@@ -31,9 +33,13 @@ public class Source extends BaseSignalHandler {
     @Override
     public void handle(Signal signal, Bus bus) {
         if (signal.getValue().equals("Tuner") && !RadioActivity.active) {
-            Intent intent = new Intent(context, RadioActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            SharedPreferences sharedPref = getSharedPreferences();
+            Boolean show = sharedPref.getBoolean(SettingsActivity.KEY_AUTO_START_RADIO, true);
+            if (show) {
+                Intent intent = new Intent(context, RadioActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
         }
     }
 }

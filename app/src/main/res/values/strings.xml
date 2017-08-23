@@ -44,9 +44,9 @@
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
 
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
+    <string name="pref_title_auto_start_radio">Show Radio activity</string>
+    <string name="pref_description_auto_start_radio">
+        Radio activity automatically brings up when radio source is activated
     </string>
 
     <string name="pref_title_display_name">Display name</string>

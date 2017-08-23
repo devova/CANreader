@@ -148,26 +148,27 @@ public class MainActivity extends ServiceConnectedActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.action_connection: {
-                Intent intent = new Intent(this, ConnectionActivity.class);
+                intent = new Intent(this, ConnectionActivity.class);
                 startActivity(intent);
                 return true;
             }
 
             case R.id.action_settings:
-                Intent intent = new Intent(this, SettingsActivity.class);
+                intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.action_about: {
-                Intent intent = new Intent(this, AboutActivity.class);
+                intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
             }
 
             case R.id.action_can_schema: {
-                Intent intent = new Intent(this, CanBusSchemaActivity.class);
+                intent = new Intent(this, CanBusSchemaActivity.class);
                 startActivity(intent);
                 return true;
             }
@@ -260,7 +261,7 @@ public class MainActivity extends ServiceConnectedActivity {
             case R.id.action_import_tx_list: {
 
                 if (bound) {
-                    Intent intent = new Intent(this, TxlPickerActivity.class);
+                    intent = new Intent(this, TxlPickerActivity.class);
                     startActivityForResult(intent, ACTION_PICK_TXL_TO_SHARE);
                 }
 

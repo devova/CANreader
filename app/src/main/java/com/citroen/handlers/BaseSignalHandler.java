@@ -1,8 +1,10 @@
 package com.citroen.handlers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 
 import com.jvit.bus.Bus;
 import com.jvit.bus.Signal;
@@ -17,6 +19,10 @@ public abstract class BaseSignalHandler implements Bus.SignalHandler {
     public BaseSignalHandler setContext(Context ctx) {
         context = ctx;
         return this;
+    }
+
+    SharedPreferences getSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public String getLastValue() {

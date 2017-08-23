@@ -33,6 +33,7 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends PreferenceActivity {
+    public static final String KEY_AUTO_START_RADIO = "auto_start_radio";
 
     /**
      * A preference value change listener that updates the preference's summary
