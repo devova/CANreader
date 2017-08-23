@@ -34,6 +34,7 @@ import java.util.List;
  */
 public class SettingsActivity extends PreferenceActivity {
     public static final String KEY_AUTO_START_RADIO = "auto_start_radio";
+    public static final String KEY_SHOW_COOLANT_TEMP = "show_coolant_temp";
 
     /**
      * A preference value change listener that updates the preference's summary

@@ -49,6 +49,8 @@
         Radio activity automatically brings up when radio source is activated
     </string>
 
+    <string name="pref_title_show_coolant_temp">Show Coolant Temp</string>
+
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
 

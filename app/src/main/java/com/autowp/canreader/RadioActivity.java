@@ -57,8 +57,8 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         TextView textOutTemp = (TextView) findViewById(R.id.textOutTemp);
         textOutTemp.setTypeface(tf);
         signal = canReaderService.bus.addSignalHandler(
-                OutTemp.getInstance().setView(textOutTemp));
-        OutTemp.getInstance().handle(signal, null);
+                Temp.getInstance().setView(textOutTemp));
+        Temp.getInstance().handle(signal, null);
     }
 
     protected void unsetHandlers() {
