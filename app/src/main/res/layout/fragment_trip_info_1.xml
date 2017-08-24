@@ -18,7 +18,7 @@
             android:src="@android:drawable/ic_menu_directions" />
 
         <TextView
-            android:id="@+id/tripFuelConsumption"
+            android:id="@+id/tripFuelConsumption1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,7 +27,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tripAvgSpeed"
+            android:id="@+id/tripAvgSpeed1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -36,7 +36,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tripDistance"
+            android:id="@+id/tripDistance1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

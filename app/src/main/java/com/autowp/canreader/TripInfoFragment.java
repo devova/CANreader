@@ -1,22 +1,28 @@
 package com.autowp.canreader;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 abstract public class TripInfoFragment extends ServiceConnectedFragment{
+    protected ArrayList<TextView> textViews = new ArrayList<>();
 
     public TripInfoFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trip_info, container, false);
+    private void setTypeFace() {
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(),"fonts/digital_7.ttf");
+
+        for (TextView tv: textViews) {
+            tv.setTypeface(tf);
+        }
     }
 
     abstract void setHandlers();
@@ -24,6 +30,7 @@ abstract public class TripInfoFragment extends ServiceConnectedFragment{
     @Override
     protected void afterConnect() {
         setHandlers();
+        setTypeFace();
     }
 
     @Override
