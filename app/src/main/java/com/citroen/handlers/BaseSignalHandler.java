@@ -21,7 +21,7 @@ public abstract class BaseSignalHandler implements Bus.SignalHandler {
         return this;
     }
 
-    public SharedPreferences getSharedPreferences() {
+    protected SharedPreferences getSharedPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 

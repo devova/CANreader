@@ -39,26 +39,26 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         radioFreq.setTypeface(tf);
         Signal signal = canReaderService.bus.addSignalHandler(
                 Frequency.getInstance().setView(radioFreq));
-        Frequency.getInstance().handle(signal, null);
+        Frequency.getInstance().handle(signal, canReaderService.bus);
 
         TextView radioMem = (TextView) findViewById(R.id.radioMem);
         radioMem.setTypeface(tf);
         signal = canReaderService.bus.addSignalHandler(
                 Memory.getInstance().setView(radioMem));
-        Memory.getInstance().handle(signal, null);
+        Memory.getInstance().handle(signal, canReaderService.bus);
 
         TextView textRadio = (TextView) findViewById(R.id.textRadio);
         textRadio.setTypeface(tf);
         signal = canReaderService.bus.addSignalHandler(
                 RadioText.getInstance().setView(textRadio));
         RadioText.getInstance().setFrequencyView(radioFreq);
-        RadioText.getInstance().handle(signal, null);
+        RadioText.getInstance().handle(signal, canReaderService.bus);
 
         TextView textOutTemp = (TextView) findViewById(R.id.textOutTemp);
         textOutTemp.setTypeface(tf);
         signal = canReaderService.bus.addSignalHandler(
-                Temp.getInstance().setView(textOutTemp));
-        Temp.getInstance().handle(signal, null);
+                Temp.getInstance().setView(textOutTemp).setContext(getApplicationContext()));
+        Temp.getInstance().handle(signal, canReaderService.bus);
     }
 
     protected void unsetHandlers() {

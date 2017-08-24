@@ -34,7 +34,7 @@ public class Temp extends TextViewBaseSignalHandler {
         if (getSharedPreferences().getBoolean(SettingsActivity.KEY_SHOW_COOLANT_TEMP, false)) {
             Signal coolantSignal = bus.messages.get(getMessageId()).signals.get("Temperature Coolant");
             if (coolantSignal.value > 0) {
-                outTemp = String.format("Out: %s/ Coolant: %s \u2103", outTemp, signal.getValue("%2.0f"));
+                outTemp = String.format("Out: %s/ Coolant: %s \u2103", outTemp, coolantSignal.getValue("%2.0f"));
             }
         }
         return outTemp;

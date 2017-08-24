@@ -8,69 +8,77 @@
 
     <ImageView
         android:id="@+id/imageBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="1280px"
+        android:layout_height="768px"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
         android:background="@drawable/bg1"
         android:src="@drawable/bg1"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/radioFrequency"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="254dp"
         android:layout_height="231dp"
-        android:layout_marginBottom="276dp"
-        android:layout_marginEnd="196dp"
+        android:layout_marginStart="368dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/audio_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/radioFrequency"
-        app:layout_constraintEnd_toEndOf="@+id/radioFrequency"/>
+        app:layout_constraintStart_toStartOf="@+id/imageBackground"
+        app:layout_constraintTop_toTopOf="@+id/imageBackground" />
 
     <TextView
         android:id="@+id/radioFrequency"
-        android:layout_width="wrap_content"
+        android:layout_width="906dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/lens_flare_right_blue"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="220dp"
         android:fontFamily="monospace"
         android:gravity="right|center_vertical"
-        android:paddingLeft="90dp"
+        android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="40dp"
-        android:text="107.2 MHz"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:text="RADIO VGOLOS"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageBackground"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/radioMem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="monospace"
         android:text="MEM 1"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/radioFrequency"
-        android:layout_marginEnd="20dp"
-        tools:layout_editor_absoluteX="793dp"
-        app:layout_constraintTop_toTopOf="@+id/radioFrequency"
-        android:layout_marginTop="217dp" />
+        app:layout_constraintBottom_toTopOf="@+id/radioFrequency"
+        app:layout_constraintEnd_toEndOf="@+id/radioFrequency" />
 
     <TextView
         android:id="@+id/textRadio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="330dp"
         android:shadowColor="@android:color/black"
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="5"
-        android:text="super very long text with nothing"
+        android:text="107.2 MHz"
         android:textSize="27sp"
         android:typeface="sans"
         app:layout_constraintRight_toRightOf="@+id/radioMem"
-        app:layout_constraintTop_toTopOf="@+id/radioFrequency" />
+        app:layout_constraintTop_toBottomOf="@+id/radioFrequency" />
 
     <fragment
         android:id="@+id/tripFragment1"
@@ -78,12 +86,11 @@
         class="com.autowp.canreader.TripInfo1Fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/fragment_trip_info"
-        tools:layout_editor_absoluteX="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-        android:layout_marginBottom="48dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_trip_info" />
 
     <fragment
         android:id="@+id/tripFragment2"
@@ -91,22 +98,21 @@
         class="com.autowp.canreader.TripInfo2Fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/fragment_trip_info"
-        tools:layout_editor_absoluteX="46dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_trip_info" />
 
     <TextView
         android:id="@+id/textOutTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="56dp"
         android:layout_marginTop="8dp"
         android:text="21 `C"
         android:textSize="25sp"
-        app:layout_constraintRight_toRightOf="@+id/radioMem"
-        app:layout_constraintTop_toTopOf="@+id/radioFrequency" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageBackground" />
 
 </android.support.constraint.ConstraintLayout>
