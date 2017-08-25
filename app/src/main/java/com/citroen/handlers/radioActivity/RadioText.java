@@ -31,12 +31,13 @@ public class RadioText extends TextViewBaseSignalHandler {
 
     @Override
     public void handle(Signal signal, Bus bus) {
-        super.handle(signal, bus);
-        if (!getString(signal, bus).isEmpty()) {
-            CharSequence freq = frequencyTextView.getText();
-            frequencyTextView.setText(getString(signal, bus));
-            textView.setText(freq);
-
+        Signal type = bus.messages.get(getMessageId()).signals.get("type");
+        if (type.value > 0) {
+            if (type.value == 50) {
+                super.handle(signal, bus);
+            } else {
+                frequencyTextView.setText(getString(signal, bus));
+            }
         }
     }
 }

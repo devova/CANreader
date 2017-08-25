@@ -18,6 +18,14 @@
       "name": "Radio status",
       "id": "0x165",
       "signals": {
+        "0": {
+          "name": "Enabled",
+          "bit_length": 1
+        },
+        "2": {
+          "name": "Muted",
+          "bit_length": 1
+        },
         "17": {
           "name": "Source",
           "bit_length": 3,
