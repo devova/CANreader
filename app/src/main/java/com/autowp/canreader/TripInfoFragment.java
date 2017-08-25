@@ -44,7 +44,7 @@ abstract public class TripInfoFragment extends ServiceConnectedFragment{
     protected void toggleFontSize() {
         isFontSizeLarge = !isFontSizeLarge;
         if (isFontSizeLarge) {
-            setFontSize(40);
+            setFontSize(35);
         } else {
             setFontSize(24);
         }
