@@ -1,16 +1,14 @@
 package com.autowp.canreader;
 
+import android.animation.ValueAnimator;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
 abstract public class TripInfoFragment extends ServiceConnectedFragment{
+    private boolean isFontSizeLarge = false;
     protected ArrayList<TextView> textViews = new ArrayList<>();
 
     public TripInfoFragment() {
@@ -22,6 +20,33 @@ abstract public class TripInfoFragment extends ServiceConnectedFragment{
 
         for (TextView tv: textViews) {
             tv.setTypeface(tf);
+        }
+    }
+
+    protected void setFontSize(float size) {
+        for (final TextView tv: textViews) {
+            float startSize = tv.getTextSize();
+            ValueAnimator animator = ValueAnimator.ofFloat(startSize, size);
+            animator.setDuration(500);
+
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    float animatedValue = (float) valueAnimator.getAnimatedValue();
+                    tv.setTextSize(animatedValue);
+                }
+            });
+
+            animator.start();
+        }
+    }
+
+    protected void toggleFontSize() {
+        isFontSizeLarge = !isFontSizeLarge;
+        if (isFontSizeLarge) {
+            setFontSize(40);
+        } else {
+            setFontSize(24);
         }
     }
 

@@ -21,7 +21,14 @@ public class TripInfo1Fragment extends TripInfoFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trip_info_1, container, false);
+        View view =  inflater.inflate(R.layout.fragment_trip_info_1, container, false);
+        view.findViewById(R.id.tripInfoPanel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggleFontSize();
+            }
+        });
+        return view;
     }
 
     @Override
