@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.autowp.can.CanAdapter;
 import com.citroen.commands.EnsureSource;
+import com.citroen.handlers.MediaSessionTextHandler;
+import com.citroen.handlers.Source;
 import com.citroen.handlers.ToastRadioFrequency;
 import com.citroen.handlers.radioActivity.*;
 import com.jvit.bus.Signal;
@@ -59,6 +61,13 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         signal = canReaderService.bus.addSignalHandler(
                 Temp.getInstance().setView(textOutTemp).setContext(getApplicationContext()));
         Temp.getInstance().handle(signal, canReaderService.bus);
+
+        signal = canReaderService.bus.addSignalHandler(
+                Source.getInstance().setContext(getApplicationContext()));
+        Source.getInstance().handle(signal, canReaderService.bus);
+
+        MediaSessionTextHandler.getInstance().setContext(getApplicationContext())
+                .updateMetaData("VGOLOS", "107.2 MHz", "RADIO");
     }
 
     protected void unsetHandlers() {

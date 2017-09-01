@@ -306,30 +306,114 @@
       "multiframe": true,
       "signals": {
         "0": {
-          "name": "b0",
-          "bit_length": 8
+          "name": "b000",
+          "bit_length": 2
+        },
+        "2": {
+          "name": "Adress Book Opened",
+          "bit_length": 1
+        },
+        "3": {
+          "name": "Call List Opened",
+          "bit_length": 1
+        },
+        "4": {
+          "name": "b000-4",
+          "bit_length": 2
+        },
+        "6": {
+          "name": "Adress Book On Screen Position",
+          "bit_length": 2
         },
         "8": {
-          "name": "b1",
+          "name": "b001",
           "bit_length": 8
         },
         "16": {
-          "name": "b2",
+          "name": "Call List Offset",
           "bit_length": 8
         },
         "24": {
-          "name": "b3",
-          "bit_length": 8
+          "name": "b003",
+          "bit_length": 6
+        },
+        "30": {
+          "name": "Call List On Screen Position",
+          "bit_length": 2
         },
         "32": {
-          "name": "b4",
+          "name": "b004",
           "bit_length": 8
         },
         "40": {
-          "name": "b6",
+          "name": "b005",
           "bit_length": 8
         },
         "48": {
+          "name": "b006",
+          "bit_length": 8
+        },
+        "56": {
+          "name": "b007",
+          "bit_length": 8
+        },
+        "64": {
+          "name": "b008",
+          "bit_length": 8
+        },
+        "72": {
+          "name": "b009",
+          "bit_length": 8
+        },
+        "80": {
+          "name": "b010",
+          "bit_length": 8
+        },
+        "88": {
+          "name": "b011",
+          "bit_length": 8
+        },
+        "96": {
+          "name": "b012",
+          "bit_length": 8
+        },
+        "104": {
+          "name": "b013",
+          "bit_length": 8
+        },
+        "112": {
+          "name": "b014",
+          "bit_length": 8
+        },
+        "120": {
+          "name": "b015",
+          "bit_length": 8
+        },
+        "128": {
+          "name": "b016",
+          "bit_length": 8
+        },
+        "136": {
+          "name": "b017",
+          "bit_length": 8
+        },
+        "144": {
+          "name": "b018",
+          "bit_length": 8
+        },
+        "152": {
+          "name": "b019",
+          "bit_length": 8
+        },
+        "160": {
+          "name": "b020",
+          "bit_length": 8
+        },
+        "168": {
+          "name": "b021",
+          "bit_length": 8
+        },
+        "176": {
           "name": "text",
           "bit_length": -1,
           "ascii": true

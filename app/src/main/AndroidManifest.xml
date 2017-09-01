@@ -12,6 +12,7 @@
     <uses-permission
         android:name="android.permission.INJECT_EVENTS"
         tools:ignore="ProtectedPermissions" />
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
 
     <application
         android:allowBackup="true"
@@ -59,6 +60,7 @@
             android:name=".CanReaderService"
             android:enabled="true"
             android:exported="false" />
+        <service android:name=".MediaService" />
 
         <activity
             android:name=".ConnectionActivity"
