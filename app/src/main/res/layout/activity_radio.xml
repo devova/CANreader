@@ -7,37 +7,18 @@
     tools:context="com.autowp.canreader.RadioActivity">
 
     <ImageView
-        android:id="@+id/imageBackground"
-        android:layout_width="1280px"
-        android:layout_height="768px"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:background="@drawable/bg1"
-        android:src="@drawable/bg1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/radioFrequency"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
         android:id="@+id/imageMode"
         android:layout_width="254dp"
         android:layout_height="231dp"
-        android:layout_marginStart="368dp"
-        android:layout_marginTop="16dp"
         android:src="@drawable/audio_icon"
-        app:layout_constraintStart_toStartOf="@+id/imageBackground"
-        app:layout_constraintTop_toTopOf="@+id/imageBackground" />
+        tools:layout_editor_absoluteX="368dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/radioFrequency"
         android:layout_width="906dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="220dp"
         android:fontFamily="monospace"
         android:gravity="right|center_vertical"
@@ -50,8 +31,6 @@
         android:text="RADIO VGOLOS"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageBackground"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -89,8 +68,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_trip_info_1"
-        app:layout_constraintTop_toTopOf="@+id/imageBackground"
-        android:layout_marginTop="16dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <fragment
         android:id="@+id/tripFragment2"
@@ -98,20 +76,30 @@
         class="com.autowp.canreader.TripInfo2Fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_trip_info_2"
         android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/tripFragment1"
         app:layout_constraintTop_toBottomOf="@+id/tripFragment1"
-        app:layout_constraintStart_toStartOf="@+id/tripFragment1" />
+        tools:layout="@layout/fragment_trip_info_2" />
 
     <TextView
         android:id="@+id/textOutTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="56dp"
-        android:layout_marginTop="8dp"
         android:text="21 `C"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageBackground" />
+        tools:layout_editor_absoluteY="8dp" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.autowp.canreader.RadioTuneFragment"
+        class="com.autowp.canreader.RadioTuneFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout="@layout/fragment_radio_tune"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>
