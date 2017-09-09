@@ -35,16 +35,6 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tripAvgSpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="0 Km/h"
-            android:textSize="24sp" />
-
-        <TextView
             android:id="@+id/tripDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +42,16 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:text="1000 Km"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tripAvgSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="0 Km/h"
             android:textSize="24sp" />
 
     </LinearLayout>

@@ -92,9 +92,9 @@
         class="com.autowp.canreader.TripInfo2Fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@+id/tripFragment1"
-        app:layout_constraintTop_toBottomOf="@+id/tripFragment1"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tripFragment1"
+        app:layout_constraintTop_toTopOf="@+id/tripFragment1"
         tools:layout="@layout/fragment_trip_info" />
 
     <TextView
