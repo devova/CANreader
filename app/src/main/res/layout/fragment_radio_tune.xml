@@ -9,17 +9,25 @@
 
     <com.sccomponents.gauges.ScLinearGauge
         android:id="@+id/tune"
-        sc:notches="5"
-        sc:notchesLength="20dp"
-        sc:pointerRadius="10dp"
-        sc:progressColor="#288636"
-        sc:progressSize="4dp"
-        sc:strokeColor="#c632c6"
-        sc:strokeSize="15dp"
-        sc:value="15"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@android:color/transparent"
-        android:padding="30dp" />
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/radio_tune"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingStart="20px"
+        android:paddingTop="20dp"
+        sc:notches="50"
+        sc:notchesColor="@color/blue"
+        sc:notchesSize="1dp"
+        sc:pointerColor="@color/blue"
+        sc:pointerRadius="5dp"
+        sc:strokeColor="@color/blue"
+        sc:strokeSize="1dp"
+        sc:textAlign="left"
+        sc:textColor="@android:color/background_light"
+        sc:textPosition="outside"
+        sc:textTokens="86"
+        sc:textUnbend="true" />
 
 </FrameLayout>

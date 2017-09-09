@@ -7,12 +7,27 @@
     tools:context="com.autowp.canreader.RadioActivity">
 
     <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
         android:id="@+id/imageMode"
         android:layout_width="254dp"
         android:layout_height="231dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:src="@drawable/audio_icon"
-        tools:layout_editor_absoluteX="368dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tuneFragment"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/radioFrequency"
@@ -66,9 +81,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/fragment_trip_info_1"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_trip_info_1" />
 
     <fragment
         android:id="@+id/tripFragment2"
@@ -92,14 +108,14 @@
         tools:layout_editor_absoluteY="8dp" />
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/tuneFragment"
         android:name="com.autowp.canreader.RadioTuneFragment"
         class="com.autowp.canreader.RadioTuneFragment"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout="@layout/fragment_radio_tune"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_radio_tune" />
 
 </android.support.constraint.ConstraintLayout>

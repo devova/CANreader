@@ -23,17 +23,18 @@ abstract public class TripInfoFragment extends ServiceConnectedFragment{
         }
     }
 
-    protected void setFontSize(float size) {
+    protected void setScale(float scale) {
         for (final TextView tv: textViews) {
-            float startSize = tv.getTextSize();
-            ValueAnimator animator = ValueAnimator.ofFloat(startSize, size);
+            float startScale = tv.getScaleX();
+            ValueAnimator animator = ValueAnimator.ofFloat(startScale, scale);
             animator.setDuration(500);
 
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
                     float animatedValue = (float) valueAnimator.getAnimatedValue();
-                    tv.setTextSize(animatedValue);
+                    tv.setScaleX(animatedValue);
+                    tv.setScaleY(animatedValue);
                 }
             });
 
@@ -41,12 +42,12 @@ abstract public class TripInfoFragment extends ServiceConnectedFragment{
         }
     }
 
-    protected void toggleFontSize() {
+    protected void toggleScale() {
         isFontSizeLarge = !isFontSizeLarge;
         if (isFontSizeLarge) {
-            setFontSize(35);
+            setScale((float) 1.2);
         } else {
-            setFontSize(24);
+            setScale(1);
         }
     }
 

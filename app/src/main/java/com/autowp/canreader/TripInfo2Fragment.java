@@ -25,7 +25,7 @@ public class TripInfo2Fragment extends TripInfoFragment{
         view.findViewById(R.id.tripInfoPanel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleFontSize();
+                toggleScale();
             }
         });
         return view;

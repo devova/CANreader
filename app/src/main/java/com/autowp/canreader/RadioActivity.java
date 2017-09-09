@@ -2,6 +2,7 @@ package com.autowp.canreader;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -14,9 +15,12 @@ import com.citroen.handlers.ToastRadioFrequency;
 import com.citroen.handlers.radioActivity.*;
 import com.jvit.bus.Signal;
 
+import java.util.Random;
+
 public class RadioActivity extends ServiceConnectedActivity implements CanReaderService.OnMonitorChangedListener,
         CanReaderService.OnConnectionStateChangedListener {
     static public boolean active = false;
+    RadioTuneFragment radioTune;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,16 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
+
+        radioTune = (RadioTuneFragment) getFragmentManager().findFragmentById(R.id.tuneFragment);
+        findViewById(R.id.imageMode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int random = new Random().nextInt((1080 - 800) + 1) + 800;
+                radioTune.setFrequency((float) random/10);
+            }
+        });
+
     }
 
     @Override
