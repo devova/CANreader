@@ -59,7 +59,7 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
         radioFreq.setTypeface(tf);
         Signal signal = canReaderService.bus.addSignalHandler(
-                Frequency.getInstance().setView(radioFreq));
+                Frequency.getInstance().setRadioTuneFragment(radioTune).setView(radioFreq));
         Frequency.getInstance().handle(signal, canReaderService.bus);
 
         TextView radioMem = (TextView) findViewById(R.id.radioMem);
