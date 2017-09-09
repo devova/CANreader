@@ -1,47 +1,56 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/tripInfoPanel"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#1a1625"
     tools:context="com.autowp.canreader.TripInfo1Fragment">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="45dp"
+        android:layout_height="120dp"
+        android:layout_weight="1"
+        android:src="@drawable/trip_icons" />
+
     <LinearLayout
+        android:id="@+id/tripInfoPanelLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:id="@+id/tripInfoPanel">
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_directions" />
+        android:layout_marginLeft="50dp"
+        android:background="#1a1625"
+        android:backgroundTint="#1a1625"
+        android:orientation="vertical"
+        android:paddingRight="5dp">
 
         <TextView
-            android:id="@+id/tripFuelConsumption1"
+            android:id="@+id/tripFuelConsumption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="5dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:text="5.5 L"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tripAvgSpeed1"
+            android:id="@+id/tripAvgSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:text="0 Km/h"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/tripDistance1"
+            android:id="@+id/tripDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:text="1000 Km"
             android:textSize="24sp" />
 

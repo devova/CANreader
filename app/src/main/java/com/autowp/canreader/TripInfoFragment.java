@@ -2,6 +2,7 @@ package com.autowp.canreader;
 
 import android.animation.ValueAnimator;
 import android.graphics.Typeface;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,28 +25,27 @@ abstract public class TripInfoFragment extends ServiceConnectedFragment{
     }
 
     protected void setScale(float scale) {
-        for (final TextView tv: textViews) {
-            float startScale = tv.getScaleX();
-            ValueAnimator animator = ValueAnimator.ofFloat(startScale, scale);
-            animator.setDuration(500);
+        final View panel = getView();
+        float startScale = panel.getScaleX();
+        ValueAnimator animator = ValueAnimator.ofFloat(startScale, scale);
+        animator.setDuration(500);
 
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float animatedValue = (float) valueAnimator.getAnimatedValue();
-                    tv.setScaleX(animatedValue);
-                    tv.setScaleY(animatedValue);
-                }
-            });
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float animatedValue = (float) valueAnimator.getAnimatedValue();
+                panel.setScaleX(animatedValue);
+                panel.setScaleY(animatedValue);
+            }
+        });
 
-            animator.start();
-        }
+        animator.start();
     }
 
-    protected void toggleScale() {
+    public void toggleScale() {
         isFontSizeLarge = !isFontSizeLarge;
         if (isFontSizeLarge) {
-            setScale((float) 1.2);
+            setScale(1.1F);
         } else {
             setScale(1);
         }

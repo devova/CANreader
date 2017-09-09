@@ -84,7 +84,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_trip_info_1" />
+        tools:layout="@layout/fragment_trip_info" />
 
     <fragment
         android:id="@+id/tripFragment2"
@@ -95,7 +95,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="@+id/tripFragment1"
         app:layout_constraintTop_toBottomOf="@+id/tripFragment1"
-        tools:layout="@layout/fragment_trip_info_2" />
+        tools:layout="@layout/fragment_trip_info" />
 
     <TextView
         android:id="@+id/textOutTemp"

@@ -21,7 +21,7 @@ public class TripInfo1Fragment extends TripInfoFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_trip_info_1, container, false);
+        View view =  inflater.inflate(R.layout.fragment_trip_info, container, false);
         view.findViewById(R.id.tripInfoPanel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,19 +33,19 @@ public class TripInfo1Fragment extends TripInfoFragment{
 
     @Override
     protected void setHandlers() {
-        TextView tripFuelConsumption = (TextView) getView().findViewById(R.id.tripFuelConsumption1);
+        TextView tripFuelConsumption = (TextView) getView().findViewById(R.id.tripFuelConsumption);
         textViews.add(tripFuelConsumption);
         Signal signal = canReaderService.bus.addSignalHandler(
                 AVG1FuelConsumption.getInstance().setView(tripFuelConsumption));
         AVG1FuelConsumption.getInstance().handle(signal, canReaderService.bus);
 
-        TextView tripAvgSpeed = (TextView) getActivity().findViewById(R.id.tripAvgSpeed1);
+        TextView tripAvgSpeed = (TextView) getView().findViewById(R.id.tripAvgSpeed);
         textViews.add(tripAvgSpeed);
         signal = canReaderService.bus.addSignalHandler(
                 AVG1Speed.getInstance().setView(tripAvgSpeed));
         AVG1Speed.getInstance().handle(signal, canReaderService.bus);
 
-        TextView tripDistance = (TextView) getActivity().findViewById(R.id.tripDistance1);
+        TextView tripDistance = (TextView) getView().findViewById(R.id.tripDistance);
         textViews.add(tripDistance);
         signal = canReaderService.bus.addSignalHandler(
                 AVG1Distance.getInstance().setView(tripDistance));

@@ -1,5 +1,6 @@
 package com.autowp.canreader;
 
+import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,8 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radio);
 
+        Fragment tripFragment1 = getFragmentManager().findFragmentById(R.id.tripFragment1);
+
         radioTune = (RadioTuneFragment) getFragmentManager().findFragmentById(R.id.tuneFragment);
         findViewById(R.id.imageMode).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +40,8 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
                 radioTune.setFrequency((float) random/10);
             }
         });
+
+
 
     }
 
