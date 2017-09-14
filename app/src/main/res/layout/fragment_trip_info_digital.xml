@@ -1,0 +1,54 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tripInfoPanel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#1a1625"
+    tools:context="com.autowp.canreader.TripInfo1Fragment">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/trip_icons_digital2" />
+
+    <TextView
+        android:id="@+id/tripDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="175dp"
+        android:layout_weight="1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="1000 Km"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tripAvgSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="175dp"
+        android:layout_weight="1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="0 Km/h"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tripFuelConsumption"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="5.5 L"
+        android:textAlignment="center"
+        android:textSize="60sp" />
+
+</FrameLayout>

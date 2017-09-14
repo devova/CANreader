@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.autowp.canreader.TripInfo2Fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_trip_info_digital"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="5dp" />
+
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.autowp.canreader.TripInfo1Fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toEndOf="@+id/fragment"
+        app:layout_constraintTop_toTopOf="@+id/fragment"
+        tools:layout="@layout/fragment_trip_info" />
+
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.autowp.canreader.TripInfo2Fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/fragment"
+        app:layout_constraintTop_toTopOf="@+id/fragment"
+        tools:layout="@layout/fragment_trip_info" />
+</android.support.constraint.ConstraintLayout>
