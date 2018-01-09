@@ -3,6 +3,7 @@ package com.autowp.canreader;
 import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -81,6 +82,20 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
                 Temp.getInstance().setView(textOutTemp).setContext(getApplicationContext()));
         Temp.getInstance().handle(signal, canReaderService.bus);
 
+        TextView textCoolantTemp = (TextView) findViewById(R.id.textCoolantTemp);
+        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(
+                SettingsActivity.KEY_SHOW_COOLANT_TEMP, false)) {
+            textCoolantTemp.setTypeface(tf);
+            signal = canReaderService.bus.addSignalHandler(
+                    CoolantTemp.getInstance().setView(textCoolantTemp).setContext(
+                            getApplicationContext()));
+            CoolantTemp.getInstance().handle(signal, canReaderService.bus);
+            textCoolantTemp.setVisibility(View.VISIBLE);
+        } else {
+            canReaderService.bus.removeSignalHandler(CoolantTemp.getInstance());
+            textCoolantTemp.setVisibility(View.INVISIBLE);
+        }
+
         signal = canReaderService.bus.addSignalHandler(
                 Source.getInstance().setContext(getApplicationContext()));
         Source.getInstance().handle(signal, canReaderService.bus);
@@ -92,6 +107,8 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
     protected void unsetHandlers() {
         canReaderService.bus.removeSignalHandler(Memory.getInstance());
         canReaderService.bus.removeSignalHandler(Frequency.getInstance());
+        canReaderService.bus.removeSignalHandler(Temp.getInstance());
+        canReaderService.bus.removeSignalHandler(CoolantTemp.getInstance());
         canReaderService.bus.addSignalHandler(ToastRadioFrequency.getInstance());
     }
 

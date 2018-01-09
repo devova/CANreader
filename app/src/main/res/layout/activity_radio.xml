@@ -7,19 +7,6 @@
     tools:context="com.autowp.canreader.RadioActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ImageView
         android:id="@+id/imageMode"
         android:layout_width="254dp"
         android:layout_height="231dp"
@@ -101,8 +88,18 @@
         android:id="@+id/textOutTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="24dp"
         android:text="21 `C"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:id="@+id/textCoolantTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="112dp"
+        android:text="68 `C"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="8dp" />

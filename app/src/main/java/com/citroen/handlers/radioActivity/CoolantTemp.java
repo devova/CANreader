@@ -5,10 +5,10 @@ import com.jvit.bus.Bus;
 import com.jvit.bus.Signal;
 
 
-public class Temp extends TextViewBaseSignalHandler {
-    private static final Temp ourInstance = new Temp();
+public class CoolantTemp extends TextViewBaseSignalHandler {
+    private static final CoolantTemp ourInstance = new CoolantTemp();
 
-    public static Temp getInstance() {
+    public static CoolantTemp getInstance() {
         return ourInstance;
     }
 
@@ -19,17 +19,17 @@ public class Temp extends TextViewBaseSignalHandler {
 
     @Override
     public String getSignalName() {
-        return "Out Temp";
+        return "Temperature Coolant";
     }
 
     @Override
     protected String getString(Signal signal, Bus bus) {
-        String outTemp;
+        String coolantTemp;
         if (signal.value > 0) {
-            outTemp = String.format("%s \u2103", signal.getValue("%2.0f"));
+            coolantTemp = String.format("%s \u2103", signal.getValue("%2.0f"));
         } else {
-            outTemp = "0 \u2103";
+            coolantTemp = "0 \u2103";
         }
-        return outTemp;
+        return coolantTemp;
     }
 }
