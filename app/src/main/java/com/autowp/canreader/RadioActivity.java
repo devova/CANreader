@@ -57,10 +57,10 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
         canReaderService.bus.removeSignalHandler(
                 ToastRadioFrequency.getInstance().setContext(getApplicationContext()));
 
-        TextView radioFreq = (TextView) findViewById(R.id.radioFrequency);
-        radioFreq.setTypeface(tf);
+        TextView textLarge = (TextView) findViewById(R.id.textLarge);
+        textLarge.setTypeface(tf);
         Signal signal = canReaderService.bus.addSignalHandler(
-                Frequency.getInstance().setRadioTuneFragment(radioTune).setView(radioFreq));
+                Frequency.getInstance().setRadioTuneFragment(radioTune).setView(textLarge));
         Frequency.getInstance().handle(signal, canReaderService.bus);
 
         TextView radioMem = (TextView) findViewById(R.id.radioMem);
@@ -69,11 +69,11 @@ public class RadioActivity extends ServiceConnectedActivity implements CanReader
                 Memory.getInstance().setView(radioMem));
         Memory.getInstance().handle(signal, canReaderService.bus);
 
-        TextView textRadio = (TextView) findViewById(R.id.textRadio);
-        textRadio.setTypeface(tf);
+        TextView textSmall = (TextView) findViewById(R.id.textSmall);
+        textSmall.setTypeface(tf);
         signal = canReaderService.bus.addSignalHandler(
-                RadioText.getInstance().setView(textRadio));
-        RadioText.getInstance().setFrequencyView(radioFreq);
+                RadioText.getInstance().setView(textSmall));
+        RadioText.getInstance().setLargeView(textLarge);
         RadioText.getInstance().handle(signal, canReaderService.bus);
 
         TextView textOutTemp = (TextView) findViewById(R.id.textOutTemp);

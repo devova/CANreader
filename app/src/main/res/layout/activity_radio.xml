@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/radioFrequency"
+        android:id="@+id/textLarge"
         android:layout_width="906dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -44,11 +44,11 @@
         android:fontFamily="monospace"
         android:text="MEM 1"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/radioFrequency"
-        app:layout_constraintEnd_toEndOf="@+id/radioFrequency" />
+        app:layout_constraintBottom_toTopOf="@+id/textLarge"
+        app:layout_constraintEnd_toEndOf="@+id/textLarge" />
 
     <TextView
-        android:id="@+id/textRadio"
+        android:id="@+id/textSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:shadowColor="@android:color/black"
@@ -59,7 +59,7 @@
         android:textSize="27sp"
         android:typeface="sans"
         app:layout_constraintRight_toRightOf="@+id/radioMem"
-        app:layout_constraintTop_toBottomOf="@+id/radioFrequency" />
+        app:layout_constraintTop_toBottomOf="@+id/textLarge" />
 
     <fragment
         android:id="@+id/tripFragment1"

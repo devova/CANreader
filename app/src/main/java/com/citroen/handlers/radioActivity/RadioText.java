@@ -8,15 +8,15 @@ import com.jvit.bus.Signal;
 
 
 public class RadioText extends TextViewBaseSignalHandler {
-    private TextView frequencyTextView;
+    private TextView largeTextView;
     private static final RadioText ourInstance = new RadioText();
 
     public static RadioText getInstance() {
         return ourInstance;
     }
 
-    public void setFrequencyView(TextView view) {
-        frequencyTextView = view;
+    public void setLargeView(TextView view) {
+        largeTextView = view;
     }
 
     @Override
@@ -36,8 +36,10 @@ public class RadioText extends TextViewBaseSignalHandler {
             if (type.value == 50) {
                 super.handle(signal, bus);
             } else {
-                frequencyTextView.setText(getString(signal, bus));
+                largeTextView.setText(getString(signal, bus));
             }
+        } else {
+            super.handle(signal, bus);
         }
     }
 }
